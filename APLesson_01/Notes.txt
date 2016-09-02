@@ -1,0 +1,13 @@
+Process Java Program by downloading" Notepad++portable 
+This way the assembly fcode can be read with a .java extension 
+You can set up JDK for two necessary processes: Compile and Execute
+Use NppExec plugin for java program 
+Write program following videos and using JDK you compile execute to make an ACII ART which is lab 01 
+
+ACII ART:a kind of art made by computer programing and it can contain every possible keywords
+Escape characters in JAVA: series of chracters representing a special chracter 
+* starts with backslash character (\)
+For example- (/t) to insert tabs in the texts 
+(\b) to insert backspace in the texts 
+(\\) to insert backslash characters in the text 
+and so more such as \r \n \f \' \" 
