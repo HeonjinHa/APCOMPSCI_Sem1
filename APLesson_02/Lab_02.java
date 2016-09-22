@@ -11,7 +11,7 @@ public class Lab_02
 		int num3 = 12613;
 		int num4 = 92130;
 		
-		System.out.println(" Mikey Ha " + num3 + " el camino real D , San Diego " + num4);
+		System.out.println("Mikey Ha " + num3 + " el camino real D , San Diego " + num4);
 		
 		int num5 = 7;
 		int num6 = 3;
