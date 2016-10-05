@@ -10,7 +10,7 @@ public class Ex_03_Cube
 		System.out.println("Please tell me the measurement of the one of your cube side ");
 		double side  = kb.nextDouble();
 
-		 Print(calcSurf(side));
+		 Print(side, calcSurf(side));
 	}
 	
 	public static double calcSurf(double side)
@@ -20,11 +20,10 @@ public class Ex_03_Cube
 	}
 	 
 	
-	public static void Print(double surface)
+	public static void Print(double side, double surface)
 
 	{
-    
-		System.out.printf ("The surface area of cube with %7.5f", side);
-		System.out.printf (" sides is... %7.5f", surface);
+	 
+		System.out.printf ("The surface area of cube with a " + side + " side is %7.5f", surface);
 	}
 }

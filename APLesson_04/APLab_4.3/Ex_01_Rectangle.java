@@ -6,7 +6,6 @@ public class Ex_01_Rectangle
 		
 		Scanner kb = new Scanner(System.in);
 		
-		
 		System.out.println("How long is your rectangle?");
 		double l = kb.nextDouble();
 		System.out.println("How tall is your rectangle");

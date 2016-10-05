@@ -15,18 +15,19 @@ public class Ex_02_Average
 		System.out.println("what is your third number");
 		double num3 = kb.nextDouble();
 		
-		 Print(calcAvg(num1, num2, num3));
+		 Print(num1, num2, num3, calcAvg(num1, num2, num3));
 	}
-	public static double calcAvg(double num1 double num2 double num3)
+	public static double calcAvg(double num1, double num2, double num3)
 	{
 		  return (num1 + num2 + num3)/ 3 ;
 	}
 	
 	 
 	
-	public static void Print(double average, double num1, double num2, double num3 )
+	public static void Print(double num1, double num2, double num3, double average)
 	{
       
-		System.out.printf ("The average of %-7.5f,%-7.5f, and %-7.5f is %-7.5f", num1,num2,num3,avg);
+		System.out.printf ("The average of %-7.5f,%-7.5f, and %-7.5f is %-7.5f", num1,num2,num3,average);
 	}
+	
 }
