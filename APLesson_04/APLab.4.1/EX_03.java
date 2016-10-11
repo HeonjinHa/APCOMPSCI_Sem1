@@ -13,7 +13,7 @@ public class EX_03
 		kb.nextLine();
 		System.out.println("Please enter in your number of Times compounded");
 		double n = kb.nextDouble();		
-		System.out.println("Lastly please enterin your Life of the Loan");
+		System.out.println("Lastly please enter in your Life of the Loan");
 		double t = kb.nextDouble();
 		
 		EX_03 average = new EX_03();
