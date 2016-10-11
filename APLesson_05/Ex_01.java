@@ -10,11 +10,11 @@ public class Ex_01
 	System.out.println("You rolled a " + P );
 	System.out.println("Computer roleld a " + C);
     
-	boolean compare = P > C; 
+	boolean bigger = P > C; 
 	
-	if (compare)
+	if (bigger)
 	System.out.println("Winner is you! ");
-    if (!compare) 		
+    if (!bigger) 		
 	System.out.println("Winner is computer!");
 	}
 }
