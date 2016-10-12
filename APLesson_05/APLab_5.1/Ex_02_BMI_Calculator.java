@@ -5,31 +5,34 @@ public class Ex_02_BMI_Calculator
 	{
 		Scanner kb = new Scanner(System.in);
 		
-		System.out.println("I am a BMI Calculator \nWhat is your height in?");
+		System.out.println("I am a BMI Calculator \nWhat is your height in inch?");
 		double height = kb.nextDouble();
-		System.out.println("And your weight?");
+		System.out.println("And your weight in pound?");
 		double weight = kb.nextDouble(); 
 		
-		double BMI 
-		System.out.println("Your BMI is... " + BMI);
+ 
+		double BMI = 703 * (weight/(height * height));
+		String value = calcBMI(BMI);
+		
+		System.out.println("Your BMI rate is... " + BMI);
+		System.out.println("Your " + value);
+		
 	}
 	
-	public static void calcBMI(double number)
+	public static String calcBMI(double value)
 	{
-		if (grade)
-			{return "Condition is Underweight"}
-		if (grade.equals("b"))
-			{return "condition is  Normal" ;}
-		if (grade.equals("c"))
+		if (value > 39.9)
+			{return "condition is Morbidly Obese";}
+		else if (value >=35)
+			{return "condition is Very Obese";}
+		else if (value >=30)
+			{return "condition is Obese";}
+		else if (value >= 25)
 			{return "condition is Overweight";}
-		if (grade.equals("d"))
-			{return "Condition is Obese";}
-		if (grade.equals("f"))
-			{return "Condition is Very Obese";}
-		if ()
-		{return "Morbidly Obese";}
-		else
-			return 0;
+		else if (value >=18.5 )
+			{return "condition is  Normal" ;}
+		else 
+			{return "condition is Underweight";}
 	}
 }
 		

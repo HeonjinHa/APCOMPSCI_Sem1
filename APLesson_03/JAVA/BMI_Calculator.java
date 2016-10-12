@@ -8,12 +8,12 @@ public class BMI_Calculator
 		
 		Scanner kb = new Scanner(System.in);
 		
-		System.out.println("Hello sir, this is new technology of BMI Calculator \nWhat is your height in m^2 ?");
+		System.out.println("Hello sir, this is new technology of BMI Calculator \nWhat is your height in inch?");
 		double height = kb.nextDouble();
-		System.out.println("And your weight in kg?");
+		System.out.println("And your weight in lb?");
 		double weight = kb.nextDouble(); 
 		
-	   double result = weight / height;
+	   double result =  703 * (weight/(height * height)); 
 	    System.out.println ("Your BMI result is..." + result);
 		
 		
