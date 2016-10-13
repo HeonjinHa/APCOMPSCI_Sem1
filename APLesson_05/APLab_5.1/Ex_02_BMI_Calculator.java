@@ -35,4 +35,3 @@ public class Ex_02_BMI_Calculator
 			{return "condition is Underweight";}
 	}
 }
-		
