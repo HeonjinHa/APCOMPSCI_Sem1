@@ -1,21 +1,28 @@
 import java.util.Scanner;
 public class Ex_08_Song
-static String = word
-static int Number = num 
-
 {
 	public static void main (String[]args) 
 	{
-		Scanner kb = new Scanner(System.in); 
-		sing();
-		sing();
-		sing();
-		sing();
+		String Na= "Na"; 
+		int num4 = 4;
+		String Hey = "Hey";
+		int num3 = 3; 
+		String Gb = "Goodbye";
+		int num1 = 1; 
+		
+		sing(Na,num4);
+		sing(Na,num4);
+		sing(Hey,num3);
+		sing(Gb,num1);
 		
 	}
 	
-	public static void sing() 
+	public static void sing(String word, int num) 
 	{
-		
+		for (int i = 0; i < num ; i++)
+		{
+			System.out.print(word + " ");
+		}
+		System.out.println("");
 	}
 }
