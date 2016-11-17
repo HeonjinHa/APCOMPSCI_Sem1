@@ -1,18 +1,31 @@
 import java.util.Scanner;
 public class Ex_02_Center
 {
-	static String word1;
-	static String word2;
-	static String word3; 
 	
 	public static void main (String[]args) 
 	{
 		Scanner kb = new Scanner(System.in); 
 		System.out.println("Please enter a word:");
-		word1 = kb.nextLine();
+		String word1 = kb.nextLine();
 		System.out.println("Please enter another word:");
-		word2 = kb.nextLine();
+		String word2 = kb.nextLine();
 		System.out.println("Please enter last one word:");
-		word3 = kb.nextLine();
+		String word3 = kb.nextLine();
+		System.out.println(makeCenter(word1));  
+		System.out.println(makeCenter(word2));
+		System.out.println(makeCenter(word3)); 
+	}
+	
+	public static String makeCenter(String word)
+	{
+		if (word.length() >= 20)
+		{
+			return word;
+		}
+		else 
+		{
+			return makeCenter(" " + word + " " );
+		}
+		
 	}
 }

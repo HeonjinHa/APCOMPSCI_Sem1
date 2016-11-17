@@ -16,8 +16,6 @@ public class Ex_06_Password
 	
 	}
 	
-	
-	
 	public static void passCheck()
 	{
 		if(U.equals("Mikey") && P.equals("haha"))
