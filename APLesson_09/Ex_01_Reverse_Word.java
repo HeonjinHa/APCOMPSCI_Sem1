@@ -22,11 +22,11 @@ public class Ex_01_Reverse_Word
 		Reversed(words);	
 	}
 	
-	public static void Reversed(String[] word)
+	public static void Reversed(String[] W)
 	{
-		for(int i = word.length; i > 0; i--)
+		for(int i = W.length; i > 0; i--)
 		{
-				
+			System.out.println(W[i-1]);
 		}
 	}
 	
