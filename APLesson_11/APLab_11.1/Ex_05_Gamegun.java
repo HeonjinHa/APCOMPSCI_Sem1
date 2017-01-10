@@ -6,15 +6,16 @@ public class Ex_05_Gamegun
 	static int shotCount;
 	static String[]clip;
 
-    public void main String[]clip;	
+    public static void main (String[]args)	
     {
+		int i =0;
 		Scanner kb = new Scanner (System.in);
         bulletCount = 96;
         shotCount = 0;
         clip = new String[clipsize];
         resetClip();
 		
-        while (runner.getBulletCount() > 0 || runner.getShotCount() > 0)
+        while ( bulletCount > 0 || shotCount > 0)
         {
             System.out.println("Action: ");
             String action = kb.next();
@@ -27,12 +28,12 @@ public class Ex_05_Gamegun
                 System.out.println(shoot());
             }
 			
-            System.out.println(printClip());
+            PrintClip();
         }
-        System.out.println("Out of bullets!!!");
+        System.out.print("Out of bullets!!!");
     }
 
-    public void resetClip()
+    public static void resetClip()
     {
         for (int i=0; i < clipsize; i++)
         {
@@ -40,7 +41,7 @@ public class Ex_05_Gamegun
         }
     }
 
-    public String shoot()
+    public static String shoot()
     {
         if (shotCount > 0)
         {
@@ -52,8 +53,9 @@ public class Ex_05_Gamegun
             return "Reload!!!";
     }
 
-    public void reload()
+    public static void reload()
     {
+	
         if (bulletCount >= clipsize)
         {
             bulletCount = bulletCount - clipsize;
@@ -72,19 +74,19 @@ public class Ex_05_Gamegun
         }
     }
 
-    public void PrintClip()
+    public static void PrintClip()
 	{
-		
-		System.our.println("Bullets:" + "\t" + bulletCount + "\n" + "Clip: " + "\t" );
-		
+		int i=0;
+		System.out.println("Bullets:" + "\t" + bulletCount + "\n" + "Clip: " + "\t" );
+	
 		String output = " "; 
 		for(i=0; i < clipsize; i++)
 		{
-			clip[i] = output;
+			output += clip[i];
 		}
 		
-		System.out.print(output);
-	}
+		System.out.print( output + "\n");
 	
+	}
    
 }

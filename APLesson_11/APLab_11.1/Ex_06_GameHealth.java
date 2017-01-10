@@ -3,15 +3,15 @@ public class Ex_06_GameHealth
     static String[]health;
     static int HEALTHLOAD = 6;
     static int healthCount;
-
-    public void main String[]health 
+	
+    public static void main(String[]args) 
     {
         health = new String [HEALTHLOAD];
         healthCount = HEALTHLOAD;
         resetHealth();
     }
 	
-    public void resetHealth()
+    public static void resetHealth()
     {
         for (int i=0; i < HEALTHLOAD; i++)
         {
@@ -20,7 +20,7 @@ public class Ex_06_GameHealth
     }
 
     
-    public String takeDamage(int dmg, int amt)
+    public static String takeDamage(int dmg, int amt)
     {
         if (dmg == 1)
         {
@@ -42,7 +42,7 @@ public class Ex_06_GameHealth
     }
 
    
-    public int getHealthCount()
+    public static int getHealthCount()
     {
         return healthCount;
     }
