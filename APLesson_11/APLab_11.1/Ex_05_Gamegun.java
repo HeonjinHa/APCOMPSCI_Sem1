@@ -6,6 +6,7 @@ public class Ex_05_Gamegun
 	static int shotCount;
 	static String[]clip;
 
+    public void main String[]clip;	
     {
 		Scanner kb = new Scanner (System.in);
         bulletCount = 96;
