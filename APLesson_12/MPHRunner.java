@@ -16,8 +16,7 @@ public class MPHRunner
         System.out.println("Your MPH is  " + object.getMPH());
 
         object.setValues (100,3,5);
-        object.getMPH();
-
-        System.out.println("Your M8PH is " + object.getMPH());
+        
+        System.out.println("Your MPH is " + object.getMPH() + " with setvalues");
     }
 }
