@@ -4,15 +4,14 @@ import java.util.Arrays;
 
 public class Ex_02_ExpressionSolver
 {
-	static ArrayList <String> equation;
-	
+
 	public static void main (String[]args)
 	{
 		Scanner kb = new Scanner(System.in); 
-		System.out.println("Eqaution: ");
-		String Equation = kb.nextLine();
+		System.out.println("Equation: ");
+		String expression= kb.nextLine();
 		
-		equation = new ArrayList<>(Arrays.asList (Equation.split(" ")));
+		ArrayList <String> equation = new ArrayList<>(Arrays.asList (expression.split(" ")));
 		System.out.println(doEquation(equation));
 	
 	}

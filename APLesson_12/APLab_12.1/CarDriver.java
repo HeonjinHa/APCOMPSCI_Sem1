@@ -7,23 +7,23 @@ public class CarDriver
         Scanner keyboard = new Scanner(System.in);
 
         System.out.println("Enter the paint color of your car:");
-        String P = kb.nextLine();
+        String P = keyboard.nextLine();
 
         System.out.println("Enter the interior type of your car:");
-        String I = kb.nextLine();
+        String I = keyboard.nextLine();
 
         System.out.println("Enter the engine type of your car:");
-        String E = kb.nextLine();
+        String E = keyboard.nextLine();
 		
         System.out.println("Enter the tires of your car:");
-        String T = kb.nextLine();
+        String T = keyboard.nextLine();
 
-        Car object = new Car(P, I, E, T);
+        Car object = new Car (P, I, E, T);
 
         System.out.println("\n\nYour vehicle is ready......\n" +
-                "Paint: \t\t\t  " + object.getPaint() + "\n" +
+                "Paint: \t\t  " + object.getPaint() + "\n" +
                 "Interior: \t\t  " + object.getInterior() + "\n" +
                 "Engine: \t\t  " + object.getEngine() + "\n" +
-                "Tires: \t\t\t  " + object.getTires());
+                "Tires: \t\t  " + object.getTires());
     }
 }

@@ -10,7 +10,7 @@ public class Ex_07_FindTheZs
 		
 		System.out.println("For the words");
 		printArray();
-		System.out.println("Only " + hasZs() + " conttain the letter z");  
+		System.out.println("Only " + hasZs() + " contain the letter z");  
 	}
 
 	public static void fillArray()
