@@ -21,7 +21,7 @@ public class HumanRunner
         System.out.println("you skin color: " + object.getSkin());
       
 	   object.setHES ("Blonde" , "Blue"  , "white "  );
-	   System.out.println("Friend's information "+ object.getHair() + "\n" + object.getEyes() + "\n" + object.getSkin() + "\n" + "with setvalues" );
+	   System.out.println(" \n Friend's information: \n"+ object.getHair() + "\n" + object.getEyes() + "\n" + object.getSkin() + "\n" + "" );
 
 
     }
