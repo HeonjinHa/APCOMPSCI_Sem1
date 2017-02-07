@@ -1,4 +1,4 @@
-public class Toy 
+public abstract class Toy 
 {
 	private String name; 
 	private int count;
@@ -21,7 +21,7 @@ public class Toy
 	}
 	public int getCount() 
 	{
-		return count;
+		return count; 
 	}
 	
 	public void setName(String N) 
@@ -33,12 +33,11 @@ public class Toy
 		count = C;
 	}
 	
-	public abstract getType()
+	public abstract String getType();
 	
 	
 	public String toString()
 	{
 		return name + count;
 	}
-	
 }

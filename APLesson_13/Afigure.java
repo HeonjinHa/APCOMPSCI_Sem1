@@ -10,7 +10,7 @@ public class Afigure extends Toy
 		super(N);
 	}
 	
-	public getType()
+	public String getType()
 	{
 		return "Action Figure";
 	}

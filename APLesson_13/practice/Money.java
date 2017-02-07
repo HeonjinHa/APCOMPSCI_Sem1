@@ -1,5 +1,5 @@
 //inheritence class, super class money 
-public class Coin extends /* // money(Super class) is extended to subclass */ Money 
+public class Money 
 {
 	private String name; 
 	private double value; 
