@@ -12,6 +12,6 @@ public class Car extends Toy
 	
 	public String getType()
 	{
-		return "Action Figure";
+		return "Car";	
 	}
 }
