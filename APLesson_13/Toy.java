@@ -30,7 +30,7 @@ public abstract class Toy
 	}
 	public void setCount(int C)
 	{
-		this.	count = C;
+		this.count = C;
 	}
 	
 	public abstract String getType();
