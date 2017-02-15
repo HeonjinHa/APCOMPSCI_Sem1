@@ -1,4 +1,4 @@
-public abstract class Console 
+public class Console extends GameSystem 
 {
 	public Console()
 	{
@@ -10,13 +10,16 @@ public abstract class Console
 		super(p);
 	}
 	
-	public abstract String getController();
+	public String getController()
+	{
+		return "";
+	}
 	
 	public String toString() 
 	{
-		return "Platform: " + platform + 
-		"\nSerial #: " + serialNo + 
-		"\nController: " + controller;
+		return "Platform: " + this.getplatform()+ 
+		"\nSerial #: " + this.getserialNo() + 
+		"\nController: " + this.getController();
 	}
 	
 }

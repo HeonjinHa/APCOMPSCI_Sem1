@@ -13,7 +13,7 @@ public class GameSystem
 	public GameSystem(String p)
 	{
 		platform = p;
-		serialNo = (int)(Math.random() * 7) +1;
+		serialNo = (int)(Math.random() * 9999999) +1;
 	}
 	
 	public String getplatform() 
