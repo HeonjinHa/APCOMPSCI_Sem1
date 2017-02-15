@@ -18,7 +18,7 @@ public abstract class Ticket
 	public String toString()
 	{
 		return "Serial #: "+this.getSerialNo()+
-					"\nPrice: " + this.getPrice();
+						"\nPrice: " + this.getPrice();
 					
 	}
 }

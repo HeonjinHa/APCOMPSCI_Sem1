@@ -9,7 +9,7 @@ public class Advance extends Ticket
 	
 	public Advance(int days)
 	{
-		daysLeft = days;
+		this.daysLeft = days;
 	}
 	
 	public int getPrice()

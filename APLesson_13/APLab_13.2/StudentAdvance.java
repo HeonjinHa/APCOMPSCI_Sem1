@@ -1,8 +1,8 @@
 public class StudentAdvance extends Advance
 {	
-	public StudentAdvance()
+	public StudentAdvance(int p)
 	{
-		super();
+		super(p);
 	}
 	
 	public int getPrice()
@@ -12,6 +12,6 @@ public class StudentAdvance extends Advance
 	
 	public String toString()
 	{
-		return super.toString()+ "\n <WITH STUDENT ID> ";
+		return super.toString()+ "\n <STUDENT ID REQUIRED> ";
 	}
 }

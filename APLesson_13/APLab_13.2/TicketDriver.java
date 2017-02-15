@@ -4,9 +4,9 @@ public class TicketDriver
 	{
 		Ticket walk = new Walkup();
 		System.out.println(walk);
-		Ticket adv = new Advance();
+		Ticket adv = new Advance(20);
 		System.out.println(adv);
-		Advance sadv = new StudentAdvance();
+		Advance sadv = new StudentAdvance(15);
 		System.out.println(sadv);
 	}
 }
