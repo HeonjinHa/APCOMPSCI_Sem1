@@ -4,7 +4,7 @@ import java.util.Arrays;
 public class Toyota implements Location
 {
 	private int id;
-	private double xpos,ypos;
+	private double xx,yy;
 	public Toyota(String pos)
 	{
 		ArrayList<String> position = new ArrayList<>(Arrays.asList(pos.split(", ")));
@@ -21,13 +21,13 @@ public class Toyota implements Location
 	
 	public void move(double x,double y)
 	{
-		xpos = x;
-		ypos = y;
+		xx = x;
+		yy = y;
 	}
 	
 	public double[] getLoc()
 	{
-		double [] location = {xpos,ypos};
+		double [] location = {xx,yy};
 		return location;
 	}
 }

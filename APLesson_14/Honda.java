@@ -4,11 +4,11 @@ import java.util.Arrays;
 
 public class Honda implements Location
 {
-	private double xpos,ypos;
+	private double xx,yy;
 	public Honda(double[] honLoc)
 	{
-		xpos = honLoc[0];
-		ypos = honLoc[1];
+		xx = honLoc[0];
+		yy = honLoc[1];
 	}
 	
 	
@@ -19,15 +19,15 @@ public class Honda implements Location
 	
 	public void move(double x,double y)
 	{
-		xpos += x;
-		ypos += y;
+		xx += x;
+		yy += y;
 	}
 	
 	public double[] getLoc()
 	{
 		double[] location = new double[2];
-		location[0] = xpos;
-		location[1] = ypos;
+		location[0] = xx;
+		location[1] = yy;
 		return location;
 	}
 }
