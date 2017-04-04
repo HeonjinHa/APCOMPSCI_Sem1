@@ -12,34 +12,16 @@ public class Satellite
         double[] home = {0, 0};
 
         String printout = "\n\n" +
-               "==========================" + "\nStarting locations...";
+               "==========================\n";
+		for(Location l : locate){
+				double xMove = Math.round(((Math.random()*100)+1)*100.00)/100.00;
+				double yMove = Math.round(((Math.random()*100)+1)*100.00)/100.00;
+				printout +="After " + l.getID() + " Moved from (" +getLocation(l.getLoc())+")";
+				((Car)l).move(xMove,2*yMove);
+				printout += "\nNew Location: (" + getLocation(l.getLoc()) + ")\n\n";
+		}
 		
-        for (Location l : locate)
-       {
-           printout += "\nLocation for " + l.getID() + ": (" + getLocation(l.getLoc()) + ")";
-       }
-
-	   
         printout += "\n\n" + "==========================" +
-                   "\nDistance from home...";
-
-        for (Location l : locate)
-       {
-           double z = getDistance(l.getLoc(), home);
-		   printout += "\nDistance for " + l.getID() + ": (" + Math.round(z*100.0)/100.0 + ")";
-       }
-	    printout += "\n\n" + "==========================";
-		double x, y;
-	   for (Location l : locate)
-	   {
-		   
-		   x = Math.round(((Math.random() * 100) + 1) * 100.0) / 100.0;
-		   y = Math.round(((Math.random() * 100) + 1) * 100.0) / 100.0;
-		   printout += "\nAfter " + l.getID() + " Moved: (" + x + ", " + y+ ")";
-		   l.move(x,y);
-		   printout += "\nNew Location: (" + getLocation(l.getLoc()) + ")\n\n";
-	   } 
-	   printout += "\n\n" + "==========================" +
                    "\nDistance from home...";
 
         for (Location l : locate)

@@ -1,7 +1,3 @@
-import java.util.Scanner;
-import java.util.ArrayList;
-import java.util.Arrays;
-
 public class Honda implements Location
 {
 	private double xx,yy;

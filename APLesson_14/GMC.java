@@ -1,6 +1,3 @@
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Scanner;
 public class GMC implements Location
 {
 	private double xx,yy;
@@ -31,7 +28,7 @@ public class GMC implements Location
 	
 	public double[] getLoc()
 	{
-		double location[]=new double[2];
+		double location[]= new double[2];
 		location[0] = xx;
 		location[1] = yy;
 		return location;
