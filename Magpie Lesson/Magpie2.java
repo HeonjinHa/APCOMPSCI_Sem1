@@ -26,13 +26,14 @@ public class Magpie2
 		/** To be completed in Exercise_02:
 		 * 	Modify the following code to use the findKeyword
 		 * 	Method (details in "Exercise_02" below. */
-		if (findKeyword(statement, "no") == 0)
-		{
-			response = "Why so negative?";
-		}
-		else if (statement.indexOf(" ") >=0)
+		 
+		if (statement.length() == 0)
 		{
 			response = "Say something, please.";
+		}
+		else if (findKeyword(statement, "no") >= 0)
+		{
+			response = "Why so negative?";
 		}
 		else if (findKeyword(statement,"mother") >= 0
 				|| findKeyword(statement,"father") >= 0
@@ -49,20 +50,22 @@ public class Magpie2
 		 * user mentions the word cat, dog, fish, or turtle
 		 * in their statement.*/
 		 
-		if (findKeyword(statement, "cat") >=0 
+		else if (findKeyword(statement, "cat") >=0 
 			|| findKeyword(statement, "turtle") >=0 
 			|| findKeyword(statement, "fish") >=0 
 			|| findKeyword(statement, "dog") >=0) 
 		{
 			response = "Tell me more about your pet"; 
 		}
-		 
-		 
-		 
-		 /* Create addtional code (another else if) that
+		
+		/* Create addtional code (another else if) that
 		 * responds "He sounds like a pretty dank teacher"
 		 * if you mention "Robinette" in your statement */
-
+		 
+		else if (findKeyword(statement, "Robinette") >=0)
+		{
+			response = "He sounds like a pretty dank teacher";
+		
 		else
 		{
 			response = getRandomResponse();
@@ -74,6 +77,7 @@ public class Magpie2
 	 * ========================================================= */
 	private int findKeyword(String statement, String goal, int startPos)
 	{
+		
 		/* New String variable phrase = a more searchable version of statement.
 		 	-Use a combination of trim() and toLowerCase() modify statement.
 
@@ -102,9 +106,33 @@ public class Magpie2
 						--return psn
 
 				Otherwise, search for goal in phrase from psn + 1 forward */
+		String phrase = statement.trim().toLowerCase();
+		goal = goal.toLowerCase();
 
+		int psn = phrase.indexOf(goal, startPos);
+
+		while (psn >= 0)
+		{
+
+			String before = " ", after = " ";
+			if (psn > 0)
+			{
+				before = phrase.substring(psn - 1, psn);
+			}
+			if (psn + goal.length() < phrase.length())
+			{
+				after = phrase.substring(psn + goal.length(),
+										psn + goal.length() + 1);
+			}
+
+			if (((before.compareTo("a") < 0) || (before.compareTo("z") > 0))
+					&& ((after.compareTo("a") < 0) || (after.compareTo("z") > 0)))
+			{
+				return psn;
+			}
+			psn = phrase.indexOf(goal, psn + 1);
+		}
 		return -1;
-
 	}
 
 	/** Override - this method is used if there are only 2 parameters...*/
