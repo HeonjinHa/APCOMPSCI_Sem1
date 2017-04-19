@@ -13,11 +13,12 @@ public class Satellite
 
         String printout = "\n\n" +
                "==========================\n";
-		for(Location l : locate){
+		for(Location l : locate)
+		{
 				double xMove = Math.round(((Math.random()*100)+1)*100.00)/100.00;
 				double yMove = Math.round(((Math.random()*100)+1)*100.00)/100.00;
 				printout +="After " + l.getID() + " Moved from (" +getLocation(l.getLoc())+")";
-				((Car)l).move(xMove,2*yMove);
+				l.move(xMove,2*yMove);
 				printout += "\nNew Location: (" + getLocation(l.getLoc()) + ")\n\n";
 		}
 		
