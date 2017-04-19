@@ -31,6 +31,10 @@ public class Magpie2
 		{
 			response = "Say something, please.";
 		}
+		else if (statement.trim().length() == 0)
+		{
+			response = "Say something, please."; 
+		}
 		else if (findKeyword(statement, "no") >= 0)
 		{
 			response = "Why so negative?";
@@ -65,7 +69,7 @@ public class Magpie2
 		else if (findKeyword(statement, "Robinette") >=0)
 		{
 			response = "He sounds like a pretty dank teacher";
-		
+		}
 		else
 		{
 			response = getRandomResponse();
