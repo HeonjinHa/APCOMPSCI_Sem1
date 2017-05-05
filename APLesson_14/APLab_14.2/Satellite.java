@@ -9,16 +9,21 @@ public class Satellite
        locate.add(new Toyota("8, 9"));
        locate.add(new GMC(3, 8));
 
-        double[] home = {0, 0};
-
-        String printout = "\n\n" +
-               "==========================\n";
-		for(Location l : locate)
+       double[] home = {0, 0};
+		
+		String printout = "\n\n" + "==========================" + "\nStarting locations...";
+        for (Location l : locate)
 		{
+           printout += "\nLocation for " + l.getID() + ": (" + getLocation(l.getLoc()) + ")";
+		}
+
+        printout += "\n\n" +
+               "==========================\n";
+		for(Location l : locate){
 				double xMove = Math.round(((Math.random()*100)+1)*100.00)/100.00;
 				double yMove = Math.round(((Math.random()*100)+1)*100.00)/100.00;
 				printout +="After " + l.getID() + " Moved from (" +getLocation(l.getLoc())+")";
-				l.move(xMove,2*yMove);
+				((Car)l).move(xMove,2*yMove);
 				printout += "\nNew Location: (" + getLocation(l.getLoc()) + ")\n\n";
 		}
 		

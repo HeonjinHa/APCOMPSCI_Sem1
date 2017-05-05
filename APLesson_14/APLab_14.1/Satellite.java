@@ -9,9 +9,15 @@ public class Satellite
        locate.add(new Toyota("8, 9"));
        locate.add(new GMC(3, 8));
 
-        double[] home = {0, 0};
+       double[] home = {0, 0};
+		
+		String printout = "\n\n" + "==========================" + "\nStarting locations...";
+        for (Location l : locate)
+		{
+           printout += "\nLocation for " + l.getID() + ": (" + getLocation(l.getLoc()) + ")";
+		}
 
-        String printout = "\n\n" +
+        printout += "\n\n" +
                "==========================\n";
 		for(Location l : locate){
 				double xMove = Math.round(((Math.random()*100)+1)*100.00)/100.00;
