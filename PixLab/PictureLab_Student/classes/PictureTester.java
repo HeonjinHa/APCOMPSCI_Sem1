@@ -17,6 +17,15 @@ public class PictureTester
     beach.explore();
   }
   
+  public static void testonlyBlue 
+  {
+	  Picture plane = new Picture("plane.jpq");
+	  plane.explore();
+	  plane.onlyBlue();
+	  plane.explore();
+  }
+  
+  
   /** Method to test mirrorVertical */
   public static void testMirrorVertical()
   {
@@ -53,12 +62,13 @@ public class PictureTester
   
   /** Main method for testing.  Every class can have a main
     * method in Java */
+	
   public static void main(String[] args)
   {
     // uncomment a call here to run a test
     // and comment out the ones you don't want
     // to run
-    testZeroBlue();
+    //testZeroBlue();
     //testKeepOnlyBlue();
     //testKeepOnlyRed();
     //testKeepOnlyGreen();

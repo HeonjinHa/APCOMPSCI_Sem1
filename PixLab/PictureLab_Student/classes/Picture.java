@@ -97,6 +97,22 @@ public class Picture extends SimplePicture
       }
     }
   }
+  /** Methd to set only blue */
+  public void onlyBlue()
+  {
+	Pixel[][] pixels = this.getPixels2D();
+    for (Pixel[] rowArray : pixels)
+    {
+      for (Pixel pixelObj : rowArray)
+      {
+        pixelObj.setRed(0);
+		pixelObj.setGreen(0);
+      }
+    }
+  }
+  
+  
+  
   
   /** Method that mirrors the picture around a 
     * vertical mirror in the center of the picture
@@ -223,7 +239,7 @@ public class Picture extends SimplePicture
    */
   public static void main(String[] args) 
   {
-    Picture beach = new Picture("beach.jpg");
+    Picture beach = new Picture("plane.jpg");
     beach.explore();
     beach.zeroBlue();
     beach.explore();
