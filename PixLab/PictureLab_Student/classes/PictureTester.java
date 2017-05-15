@@ -17,14 +17,37 @@ public class PictureTester
     beach.explore();
   }
   
-  public static void testonlyBlue 
-  {
-	  Picture plane = new Picture("plane.jpq");
+   public static void testKeepOnlyBlue()
+   {
+	  Picture plane = new Picture("plane.jpg");
 	  plane.explore();
-	  plane.onlyBlue();
+	  plane.keepOnlyBlue();
 	  plane.explore();
   }
   
+  public static void testNegate()
+  {
+	  Picture swan = new Picture("swan.jpg");
+	  swan.explore();
+	  swan.negate();
+	  swan.explore();
+  }
+  
+   public static void testGrayscale()
+  {
+	  Picture water = new Picture("water.jpg");
+	  water.explore();
+	  water.grayscale();
+	  water.explore();
+  }
+  
+  public static void testFixUnderwater()
+  {
+	  Picture water = new Picture("water.jpg");
+	  water.explore();
+	  water.fixUnderwater();
+	  water.explore();
+  }
   
   /** Method to test mirrorVertical */
   public static void testMirrorVertical()
@@ -35,6 +58,33 @@ public class PictureTester
     caterpillar.explore();
   }
   
+  public static void testMirrorVerticalRightToLeft()
+  {
+    Picture caterpillar = new Picture("caterpillar.jpg");
+    caterpillar.explore();
+    caterpillar.MirrorVerticalRightToLeft();
+    caterpillar.explore();
+  }
+  
+   public static void testMirrorHorizontal();
+  {
+	Picture caterpillar = new Picture("caterpillar.jpg");
+	caterpillar.explore();
+	caterpillar.MirrorHorizontal();
+	caterpillar.explore();
+  }
+  
+
+  public static void testMirrorHorizontalBotToTop()
+  {
+	Picture caterpillar = new Picture("caterpillar.jpg");
+	caterpillar.explore();
+	caterpillar.MirrorHorizontalBotToTop();
+	caterpillar.explore();
+  }
+
+  
+
   /** Method to test mirrorTemple */
   public static void testMirrorTemple()
   {
@@ -43,6 +93,17 @@ public class PictureTester
     temple.mirrorTemple();
     temple.explore();
   }
+  
+  
+  public static void testMirrorArms()
+  {
+    Picture snowman = new Picture("snowman.jpg");
+    snowman.explore();
+    snowman.mirrorArms();
+    snowman.explore();
+  }
+  
+  
   
   /** Method to test the collage method */
   public static void testCollage()
@@ -76,10 +137,13 @@ public class PictureTester
     //testGrayscale();
     //testFixUnderwater();
     //testMirrorVertical();
+	//testMirrorVerticalRightToLeft();
+	//testMirrorHorizontal();
+	//testMirrorHorizontalBotToTop();
+	//testMirrorDiagonal();
     //testMirrorTemple();
     //testMirrorArms();
     //testMirrorGull();
-    //testMirrorDiagonal();
     //testCollage();
     //testCopy();
     //testEdgeDetection();
