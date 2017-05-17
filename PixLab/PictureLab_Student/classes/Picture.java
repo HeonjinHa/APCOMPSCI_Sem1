@@ -256,13 +256,13 @@ public class Picture extends SimplePicture
   
   public void mirrorArms()
   {
-	int mirrorPoint = 190;
+	int mirrorPoint = 194;
     Pixel topPixel = null;
     Pixel botPixel = null;
     Pixel[][] pixels = this.getPixels2D();
     
   
-    for (int row = 165; row < mirrorPoint; row++)
+    for (int row = 163; row < mirrorPoint; row++)
     {
       for (int col = 100; col < 300; col++)
       {
@@ -276,20 +276,18 @@ public class Picture extends SimplePicture
   
   public void mirrorGull()
 {
-	int mirrorPoint = 350;
+	int mirrorPoint = 343;
     Pixel leftPixel = null;
     Pixel rightPixel = null;
     Pixel[][] pixels = this.getPixels2D();
     
-    // loop through the rows
-    for (int row = 235; row < 325; row++)
+    for (int row = 232; row < 323; row++)
     {
-      // loop from 13 to just before the mirror point
-      for (int col = 240; col < mirrorPoint; col++)
+      for (int col = 237; col < mirrorPoint; col++)
       {
         
-        rightPixel = pixels[row][col];      
-        leftPixel = pixels[row][mirrorPoint - col + mirrorPoint/3];
+        leftPixel = pixels[row][col];      
+        rightPixel = pixels[row][mirrorPoint - col + mirrorPoint/3];
         leftPixel.setColor(rightPixel.getColor());
 
       }
@@ -418,7 +416,7 @@ public class Picture extends SimplePicture
    */
   public static void main(String[] args) 
   {
-    Picture beach = new Picture("beach.jpg");
+    Picture beach = new Picture("seagull.jpg");
     beach.explore();
     beach.zeroBlue();
     beach.explore();

@@ -131,6 +131,7 @@ public class PictureTester
 	  
   }
   
+  
   /** Method to test edgeDetection */
   public static void testEdgeDetection()
   {
@@ -161,9 +162,9 @@ public class PictureTester
 	//testMirrorDiagonal();
     //testMirrorTemple();
     //testMirrorArms();
-    //testMirrorGull();
+    testMirrorGull();
     //testCollage();
-	testmycollage();
+	//testmycollage();
     //testCopy();
     //testEdgeDetection();
     //testEdgeDetection2();
