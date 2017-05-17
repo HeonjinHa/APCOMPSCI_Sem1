@@ -106,18 +106,29 @@ public class PictureTester
   
   public static void testMirrorGull()
   {
-	  Picture gull = new Picture("seagull.jpq");
-	  gull.explore();
-	  gull.MirrorGull();
-	  gull.explore();
+    Picture seagull = new Picture("seagull.jpg");
+	seagull.explore();
+    seagull.mirrorGull();
+    seagull.explore();
   }
   
+ 
   /** Method to test the collage method */
   public static void testCollage()
   {
     Picture canvas = new Picture("640x480.jpg");
+    canvas.explore();
     canvas.createCollage();
     canvas.explore();
+  }
+  
+  public static void testmycollage()
+  {
+	  Picture canvas = new Picture("640x480.jpq");
+	  canvas.explore();
+	  canvas.myCollage();
+	  canvas.explore();
+	  
   }
   
   /** Method to test edgeDetection */
@@ -150,8 +161,9 @@ public class PictureTester
 	//testMirrorDiagonal();
     //testMirrorTemple();
     //testMirrorArms();
-    testMirrorGull();
+    //testMirrorGull();
     //testCollage();
+	testmycollage();
     //testCopy();
     //testEdgeDetection();
     //testEdgeDetection2();
