@@ -287,8 +287,8 @@ public class Picture extends SimplePicture
       {
         
         leftPixel = pixels[row][col];      
-        rightPixel = pixels[row][mirrorPoint - col + mirrorPoint/3];
-        leftPixel.setColor(rightPixel.getColor());
+        rightPixel = pixels[row][mirrorPoint + col - 230];
+        rightPixel.setColor(leftPixel.getColor());
 
       }
     }
@@ -369,18 +369,21 @@ public class Picture extends SimplePicture
   
     public void myCollage()
   {
-	Picture flower1 = new Picture("flower1.jpg");
-    Picture flower2 = new Picture("flower2.jpg");
-    this.secondcopy(flower1,0,0);
-    this.secondcopy(flower2,100,0);
-    this.secondcopy(flower1,200,0);
-    Picture flowerNoBlue = new Picture(flower2);
-    flowerNoBlue.zeroBlue();
-    this.secondcopy(flowerNoBlue,300,0);
-    this.secondcopy(flower1,400,0);
-    this.secondcopy(flower2,500,0);
-    this.mirrorVertical();
-    this.write("collage.jpg");
+	Picture pic1 = new Picture("caterpillar.jpg");
+    Picture pic2 = new Picture("robot.jpg");
+	Picture pic3 = new Picture("snowman.jpg");
+	Picture snowmanxblue = new Picture(pic3);
+    snowmanxblue.zeroBlue();
+    this.secondcopy(pic1,0,0);
+    this.secondcopy(snowmanxblue,150,0);
+	this.secondcopy(pic2,520,60);
+	this.secondcopy(pic2,520,120);
+	this.secondcopy(pic2,520,180);
+	this.secondcopy(pic2,520,240);
+	this.secondcopy(pic2,520,0);
+	this.negate();
+	this.mirrorVertical();
+    this.write("myCollage.jpg");
   }
   
   

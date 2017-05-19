@@ -122,12 +122,12 @@ public class PictureTester
     canvas.explore();
   }
   
-  public static void testmycollage()
+  public static void testmyCollage()
   {
-	  Picture canvas = new Picture("640x480.jpq");
-	  canvas.explore();
-	  canvas.myCollage();
-	  canvas.explore();
+	  Picture object = new Picture("600x590.jpg");
+	  object.explore();
+	  object.myCollage();
+	  object.explore();
 	  
   }
   
@@ -162,9 +162,9 @@ public class PictureTester
 	//testMirrorDiagonal();
     //testMirrorTemple();
     //testMirrorArms();
-    testMirrorGull();
+    //testMirrorGull();
     //testCollage();
-	//testmycollage();
+	testmyCollage();
     //testCopy();
     //testEdgeDetection();
     //testEdgeDetection2();
