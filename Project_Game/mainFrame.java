@@ -1,11 +1,10 @@
 import javax.swing.*;
 import java.awt.*;
 
-public class Frame_make 
+public class mainFrame
 {
 	public static void main(String[] args)
 	{
-	Frame_make_sub fms = new Frame_make_sub();
+		Frame frame = new Frame();
 	}
 }
-

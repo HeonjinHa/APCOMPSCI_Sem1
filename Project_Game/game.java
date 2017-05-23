@@ -1,14 +1,11 @@
-package Project_Game; 
-
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.*;
 
-public class Main 
-{ 
-	
+public class game
+{
 	public static void main(String[] args)
 	{
-		Beat() obejct = new Beat();
-
+		gameFrame fr = new gameFrame();
 	}
 }
