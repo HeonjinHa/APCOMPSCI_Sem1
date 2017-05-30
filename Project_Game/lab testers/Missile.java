@@ -5,6 +5,7 @@ public class Missile
 	Missile(int x, int y)
 	{
 		pos = new Point(x,y);
+		move(int x,int y);
 	}
 	
 	public void move() 
