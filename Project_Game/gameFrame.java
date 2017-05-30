@@ -8,6 +8,7 @@ import java.util.*;
 public class gameFrame extends JFrame implements KeyListener,Runnable
 {
 	int x,y;
+
 	boolean KeyUp = false;
 	boolean KeyDown = false;
 	boolean KeyLeft = false;

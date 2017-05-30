@@ -10,6 +10,7 @@ public class gameFrametest extends JFrame implements KeyListener,Runnable
 	int width;
 	int height;
 	int x,y;
+	
 	boolean KeyUp = false;
 	boolean KeyDown = false;
 	boolean KeyLeft = false;
@@ -19,7 +20,7 @@ public class gameFrametest extends JFrame implements KeyListener,Runnable
 	
 	Toolkit tk = Toolkit.getDefaultToolkit(); //toolkit for creating an image.
 	Image airplane;
-	Image Miss; 
+	Image missileImage; 
 	ArrayList MissList = new ArrayList();
 	
 	Image buffImage;
@@ -31,13 +32,12 @@ public class gameFrametest extends JFrame implements KeyListener,Runnable
 	{		
 		init(); //same as Frame class.
 		start(); //same as Frame class.
-		
 		setTitle("Shooting Game");
 		setSize(width,height);
 		
 		Dimension screen = tk.getScreenSize(); //Gets the size of the screen.
-		
 		//To set the frame on the middle of the screen
+		
 		int fXPos = (int)screen.getWidth() / 2 - 800 / 2;
 		int fYPos = (int)screen.getHeight() / 2 - 900 / 2;
 		
@@ -51,17 +51,18 @@ public class gameFrametest extends JFrame implements KeyListener,Runnable
 	
 	public void init()
 	{ 
-		int x = 100;
-		int y = 100;
-		int width = 800;
-		int height = 900;
-		
+		x = 100;
+		y = 100;
+		width = 800;
+		height = 900;
 		airplane = tk.getImage("plane.png");
-		Miss = tk.getImage("Miss.png");
+		missileImage = tk.getImage("Miss.png");
+	
 	}
 	
 	public void start()
 	{
+		
 		//sets the operation that will happen by default when the user initiates a "close" on this frame.
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		
@@ -90,7 +91,6 @@ public class gameFrametest extends JFrame implements KeyListener,Runnable
 		}
 		catch(Exception e)
 		{
-			
 		}
 	}
 	
@@ -114,7 +114,6 @@ public class gameFrametest extends JFrame implements KeyListener,Runnable
 	public void update(Graphics g)
 	{
 		DrawChar();
-		
 		DrawMissile(); 
 		
 		g.drawImage(buffImage,0,0,this);
@@ -132,14 +131,14 @@ public class gameFrametest extends JFrame implements KeyListener,Runnable
 	
 	public void DrawMissile()
 	{
-		for(int i=0; i<MissList.size();i++)
+		for(int i=0; i < MissList.size(); ++i)
 		{
 			ms=(Missile)(MissList.get(i));
 			
-			buffg.drawImage(Miss,ms,pos.x+150, ms.pos.y+30,this);
-			
+			buffg.drawImage(missileImage,ms.pos.x+ 150, ms.pos.y+30, this);			
 			ms.move();
-			if(ms.pos.x> width)
+			
+			if( ms.pos.x> width)
 			{
 				MissList.remove(i);
 			}
@@ -194,12 +193,10 @@ public class gameFrametest extends JFrame implements KeyListener,Runnable
 			break; 
 		}
 	}
-
 	
 	//Executed when the user types something
 	public void keyTyped(KeyEvent e)
 	{
-		
 	}
 	
 	//Actually moves the airplane as the user presses a key
