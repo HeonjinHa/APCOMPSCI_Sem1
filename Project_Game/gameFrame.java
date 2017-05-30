@@ -1,6 +1,7 @@
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
+import java.util.*;
 
 //KeyListener for keyevents
 //Runnable for threads
@@ -15,6 +16,9 @@ public class gameFrame extends JFrame implements KeyListener,Runnable
 	
 	Toolkit tk = Toolkit.getDefaultToolkit(); //toolkit for creating an image.
 	Image airplane = tk.getImage("plane.png"); //get an image of airplane.
+	
+	Image buffImage;
+	Graphics buffg;
 	
 	gameFrame()
 	{		
@@ -33,7 +37,7 @@ public class gameFrame extends JFrame implements KeyListener,Runnable
 		setLocation(fXPos,fYPos);
 	
 		//make users not change the size
-		setResizable(true);
+		setResizable(false);
 		setVisible(true);
 		
 		
@@ -81,12 +85,26 @@ public class gameFrame extends JFrame implements KeyListener,Runnable
 	
 	public void paint(Graphics g)
 	{
+		buffImage = createImage(800,900);
+		buffg = buffImage.getGraphics();
+		
+		update(g);
+	}
+	
+	public void update(Graphics g)
+	{
+		DrawChar();
+		g.drawImage(buffImage,0,0,this);
+	}
+	
+	public void DrawChar()
+	{
 		//Clears the specified rectangle by filling it with 
 		//the background color of the current drawing surface.
-		g.clearRect(0,0,800,900);
+		buffg.clearRect(0,0,800,900);
 		
 		//Put the image of an airplane on (100,100).
-		g.drawImage(airplane,x+350,y+750,this); // this = imageobserver = hard to explain.
+		buffg.drawImage(airplane,x+350,y+750,this); // this = imageobserver = hard to explain.
 	}
 	
 	//Actions when the user presses control keys
@@ -153,8 +171,11 @@ public class gameFrame extends JFrame implements KeyListener,Runnable
 //   https://docs.oracle.com/javase/7/docs/api/java/awt/Toolkit.html 
 //     -->getDefaultToolkit(), getScreenSize()
 //   https://docs.oracle.com/javase/7/docs/api/javax/swing/JFrame.html
-//     -->setDefaultCloseOperation)(JFrame.EXIT_ON_CLOSE)
+//     -->setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE)
 //   https://docs.oracle.com/javase/7/docs/api/java/awt/Graphics.html
 //     -->Graphics
 //   https://docs.oracle.com/javase/7/docs/api/java/awt/event/KeyEvent.html
 //     -->KeyEvent
+//   https://docs.oracle.com/javase/tutorial/extra/fullscreen/doublebuf.html
+//   https://stackoverflow.com/questions/4430356/java-how-to-do-double-buffering-in-swing
+//     -->Doublebuffering 

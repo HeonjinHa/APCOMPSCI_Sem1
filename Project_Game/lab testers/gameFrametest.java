@@ -1,37 +1,39 @@
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
+import java.util.*; //import for an ArrayList 
 
 //KeyListener for keyevents
 //Runnable for threads
-public class gameFrame extends JFrame implements KeyListener,Runnable
+public class gameFrametest extends JFrame implements KeyListener,Runnable
 {
-	int f_width;
-	int f_height
+	int width;
+	int height;
 	int x,y;
 	boolean KeyUp = false;
 	boolean KeyDown = false;
 	boolean KeyLeft = false;
 	boolean KeyRight = false;
-	boolean KeySpace = false;
-	
+    boolean KeySpace = false; 
 	Thread th;	
+	
 	Toolkit tk = Toolkit.getDefaultToolkit(); //toolkit for creating an image.
-	Image airplane; 
-	Image missile;
-	ArrayList missile_list = new ArrayList(); 
+	Image airplane;
+	Image Miss; 
+	ArrayList MissList = new ArrayList();
 	
-	Image buffImage; Graphics buffg;
+	Image buffImage;
+	Graphics buffg;
 	
-	Miss ms; 
+	Missile ms; 
 	
-	gameFrame()
+	gameFrametest()
 	{		
 		init(); //same as Frame class.
 		start(); //same as Frame class.
 		
 		setTitle("Shooting Game");
-		setSize(800,900);
+		setSize(width,height);
 		
 		Dimension screen = tk.getScreenSize(); //Gets the size of the screen.
 		
@@ -44,18 +46,18 @@ public class gameFrame extends JFrame implements KeyListener,Runnable
 		//make users not change the size
 		setResizable(false);
 		setVisible(true);
+		
 	}
 	
 	public void init()
 	{ 
 		int x = 100;
 		int y = 100;
-		f_width = 800;
-		f_height = 600;
+		int width = 800;
+		int height = 900;
 		
-		airplane = tk.getImage("plane.png"); //get an image of airplane.
-		missile = tk.getImage("Miss.png"); 
-		
+		airplane = tk.getImage("plane.png");
+		Miss = tk.getImage("Miss.png");
 	}
 	
 	public void start()
@@ -81,9 +83,9 @@ public class gameFrame extends JFrame implements KeyListener,Runnable
 			while(true)
 			{
 				KeyProcess();
+				MissileProcess(); 
 				repaint();
 				Thread.sleep(20);
-				MissileProcess(); 
 			}
 		}
 		catch(Exception e)
@@ -92,26 +94,56 @@ public class gameFrame extends JFrame implements KeyListener,Runnable
 		}
 	}
 	
-	public void MissileProcess() 
+	public void MissileProcess()
 	{
-		if (KeySpace) 
+		if(KeySpace)
 		{
-			ms = new Missile(x,y); 
-			missile_list.add(ms);
-			
+			ms = new Missile(x,y);
+			MissList.add(ms);
 		}
 	}
 	
-	
-	
 	public void paint(Graphics g)
+	{
+		buffImage = createImage(800,900);
+		buffg = buffImage.getGraphics();
+		
+		update(g);
+	}
+	
+	public void update(Graphics g)
+	{
+		DrawChar();
+		
+		DrawMissile(); 
+		
+		g.drawImage(buffImage,0,0,this);
+	}
+	
+	public void DrawChar()
 	{
 		//Clears the specified rectangle by filling it with 
 		//the background color of the current drawing surface.
-		g.clearRect(0,0,800,900);
+		buffg.clearRect(0,0,800,900);
 		
 		//Put the image of an airplane on (100,100).
-		g.drawImage(airplane,x+350,y+750,this); // this = imageobserver = hard to explain.
+		buffg.drawImage(airplane,x+350,y+750,this); // this = imageobserver = hard to explain.
+	}
+	
+	public void DrawMissile()
+	{
+		for(int i=0; i<MissList.size();i++)
+		{
+			ms=(Missile)(MissList.get(i));
+			
+			buffg.drawImage(Miss,ms,pos.x+150, ms.pos.y+30,this);
+			
+			ms.move();
+			if(ms.pos.x> width)
+			{
+				MissList.remove(i);
+			}
+		}
 	}
 	
 	//Actions when the user presses control keys
@@ -134,6 +166,9 @@ public class gameFrame extends JFrame implements KeyListener,Runnable
 			case KeyEvent.VK_RIGHT:
 			KeyRight = true;
 			break;
+			case KeyEvent.VK_SPACE:
+			KeySpace = true;
+			break;
 		}
 	}
 
@@ -154,6 +189,9 @@ public class gameFrame extends JFrame implements KeyListener,Runnable
 			case KeyEvent.VK_RIGHT:
 			KeyRight = false;
 			break;
+			case KeyEvent.VK_SPACE:
+			KeySpace = false; 
+			break; 
 		}
 	}
 
@@ -174,6 +212,8 @@ public class gameFrame extends JFrame implements KeyListener,Runnable
 	}
 }
 
+
+
 //Resources
 //   https://docs.oracle.com/javase/7/docs/api/java/awt/Toolkit.html 
 //     -->getDefaultToolkit(), getScreenSize()
@@ -183,3 +223,6 @@ public class gameFrame extends JFrame implements KeyListener,Runnable
 //     -->Graphics
 //   https://docs.oracle.com/javase/7/docs/api/java/awt/event/KeyEvent.html
 //     -->KeyEvent
+//   https://docs.oracle.com/javase/tutorial/extra/fullscreen/doublebuf.html
+//   https://stackoverflow.com/questions/4430356/java-how-to-do-double-buffering-in-swing
+//     -->Doublebuffering 
