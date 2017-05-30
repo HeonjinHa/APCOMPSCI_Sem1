@@ -43,6 +43,10 @@ public class Magpie3
 		{
   			response = transformIWantToStatement(statement);
 		}
+		else if (findKeyword(statement, "you") >= 0) 
+		{
+			response = transformYouMeStatement(statement);
+		}
 		else 
 		{
   			int psn = findKeyword(statement, "you", 0);
@@ -79,6 +83,7 @@ public class Magpie3
   		return "What would it mean to" + restOfStatement + "?";
 	}
 	
+
 	private String transformYouMeStatement(String statement) 
 	{
   		statement = statement.trim();
@@ -92,6 +97,8 @@ public class Magpie3
   		String restOfStatement = statement.substring(psnOfYou + 3, psnOfMe);
    		return "What makes you think that I" + restOfStatement + "you?";
 	}
+	
+	
 	private String transformIYoustatement(String statement) 
 	{
   		statement = statement.trim();
