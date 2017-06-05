@@ -15,18 +15,13 @@ public class gameFrame extends JFrame implements KeyListener,Runnable
 	boolean KeyDown = false;
 	boolean KeyLeft = false;
 	boolean KeyRight = false;
-    boolean KeySpace = false; 
 	Thread th;	
 	
 	Toolkit tk = Toolkit.getDefaultToolkit(); //toolkit for creating an image.
-	Image airplane;
-	Image missileImage; 
-	ArrayList MissList = new ArrayList();
+	Image airplane = tk.getImage("plane.png"); //get an image of airplane.
 	
 	Image buffImage;
 	Graphics buffg;
-	
-	Missile ms; 
 	
 	gameFrame()
 	{		
@@ -36,8 +31,8 @@ public class gameFrame extends JFrame implements KeyListener,Runnable
 		setSize(width,height);
 		
 		Dimension screen = tk.getScreenSize(); //Gets the size of the screen.
-		//To set the frame on the middle of the screen
 		
+		//To set the frame on the middle of the screen
 		int fXPos = (int)screen.getWidth() / 2 - width / 2;
 		int fYPos = (int)screen.getHeight() / 2 - height / 2;
 		
@@ -47,6 +42,7 @@ public class gameFrame extends JFrame implements KeyListener,Runnable
 		setResizable(false);
 		setVisible(true);
 		
+		
 	}
 	
 	public void init()
@@ -55,14 +51,11 @@ public class gameFrame extends JFrame implements KeyListener,Runnable
 		y = 100;
 		width = 800;
 		height = 900;
-		airplane = tk.getImage("plane.png");
-		missileImage = tk.getImage("Miss.png");
-	
+		
 	}
 	
 	public void start()
 	{
-		
 		//sets the operation that will happen by default when the user initiates a "close" on this frame.
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		
@@ -84,22 +77,13 @@ public class gameFrame extends JFrame implements KeyListener,Runnable
 			while(true)
 			{
 				KeyProcess();
-				MissileProcess(); 
 				repaint();
 				Thread.sleep(20);
 			}
 		}
 		catch(Exception e)
 		{
-		}
-	}
-	
-	public void MissileProcess()
-	{
-		if(KeySpace)
-		{
-			ms = new Missile(x,y);
-			MissList.add(ms);
+			
 		}
 	}
 	
@@ -114,8 +98,6 @@ public class gameFrame extends JFrame implements KeyListener,Runnable
 	public void update(Graphics g)
 	{
 		DrawChar();
-		DrawMissile(); 
-		
 		g.drawImage(buffImage,0,0,this);
 	}
 	
@@ -126,23 +108,7 @@ public class gameFrame extends JFrame implements KeyListener,Runnable
 		buffg.clearRect(0,0,width,height);
 		
 		//Put the image of an airplane on (100,100).
-		buffg.drawImage(airplane,x+187,y+670,this); // this = imageobserver = hard to explain.
-	}
-	
-	public void DrawMissile()
-	{
-		for(int i=0; i < MissList.size(); i++)
-		{
-			ms=(Missile)(MissList.get(i));
-			
-			buffg.drawImage(missileImage,ms.pos.x+ 250, ms.pos.y+650, this);			
-			ms.move();
-			
-			if( ms.pos.x> width)
-			{
-				MissList.remove(i);
-			}
-		}
+		buffg.drawImage(airplane,x+250,y+600,this); // this = imageobserver = hard to explain.
 	}
 	
 	//Actions when the user presses control keys
@@ -165,9 +131,6 @@ public class gameFrame extends JFrame implements KeyListener,Runnable
 			case KeyEvent.VK_RIGHT:
 			KeyRight = true;
 			break;
-			case KeyEvent.VK_SPACE:
-			KeySpace = true;
-			break;
 		}
 	}
 
@@ -188,15 +151,14 @@ public class gameFrame extends JFrame implements KeyListener,Runnable
 			case KeyEvent.VK_RIGHT:
 			KeyRight = false;
 			break;
-			case KeyEvent.VK_SPACE:
-			KeySpace = false; 
-			break; 
 		}
 	}
+
 	
 	//Executed when the user types something
 	public void keyTyped(KeyEvent e)
 	{
+		
 	}
 	
 	//Actually moves the airplane as the user presses a key
@@ -209,13 +171,11 @@ public class gameFrame extends JFrame implements KeyListener,Runnable
 	}
 }
 
-
-
 //Resources
 //   https://docs.oracle.com/javase/7/docs/api/java/awt/Toolkit.html 
 //     -->getDefaultToolkit(), getScreenSize()
 //   https://docs.oracle.com/javase/7/docs/api/javax/swing/JFrame.html
-//     -->setDefaultCloseOperation)(JFrame.EXIT_ON_CLOSE)
+//     -->setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE)
 //   https://docs.oracle.com/javase/7/docs/api/java/awt/Graphics.html
 //     -->Graphics
 //   https://docs.oracle.com/javase/7/docs/api/java/awt/event/KeyEvent.html

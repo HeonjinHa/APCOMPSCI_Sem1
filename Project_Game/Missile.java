@@ -1,3 +1,8 @@
+import javax.swing.*;
+import java.awt.*;
+import java.awt.event.*;
+import java.util.*; //for an ArrayList 
+
 public class Missile
 {
 	Point pos; 
@@ -10,6 +15,6 @@ public class Missile
 	
 	public void move() 
 	{
-		pos.x +=10;
+		pos.y -=50;
 	}
 }

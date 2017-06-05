@@ -1,11 +1,11 @@
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
-import java.util.*;
+import java.util.*; //import for an ArrayList 
 
 //KeyListener for keyevents
 //Runnable for threads
-public class gameFrame extends JFrame implements KeyListener,Runnable
+public class gameFrametest extends JFrame implements KeyListener,Runnable
 {
 	int width;
 	int height;
@@ -28,7 +28,7 @@ public class gameFrame extends JFrame implements KeyListener,Runnable
 	
 	Missile ms; 
 	
-	gameFrame()
+	gameFrametest()
 	{		
 		init(); //same as Frame class.
 		start(); //same as Frame class.

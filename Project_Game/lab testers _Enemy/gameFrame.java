@@ -1,51 +1,57 @@
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
-import java.util.*; //import for an ArrayList 
+import java.util.*;
 
 //KeyListener for keyevents
 //Runnable for threads
-public class gameFrametest extends JFrame implements KeyListener,Runnable
+public class gameFrame extends JFrame implements KeyListener,Runnable
 {
-	int width;
+	int width; 
 	int height;
-	int x,y;
 	
+	int x,y;
+
 	boolean KeyUp = false;
 	boolean KeyDown = false;
 	boolean KeyLeft = false;
 	boolean KeyRight = false;
-    boolean KeySpace = false; 
+	
+	int cnt;
 	Thread th;	
 	
 	Toolkit tk = Toolkit.getDefaultToolkit(); //toolkit for creating an image.
+	
 	Image airplane;
-	Image missileImage; 
-	ArrayList MissList = new ArrayList();
+	Image xplane; 
+	
+	ArrayList EnemyList = new ArrayList(); 
 	
 	Image buffImage;
 	Graphics buffg;
 	
-	Missile ms; 
+	Enemy en;
 	
-	gameFrametest()
+	gameFrame()
 	{		
 		init(); //same as Frame class.
 		start(); //same as Frame class.
+		
 		setTitle("Shooting Game");
 		setSize(width,height);
 		
 		Dimension screen = tk.getScreenSize(); //Gets the size of the screen.
-		//To set the frame on the middle of the screen
 		
-		int fXPos = (int)screen.getWidth() / 2 - 800 / 2;
-		int fYPos = (int)screen.getHeight() / 2 - 900 / 2;
+		//To set the frame on the middle of the screen
+		int fXPos = (int)screen.getWidth() / 2 - width / 2;
+		int fYPos = (int)screen.getHeight() / 2 - he/ 2;
 		
 		setLocation(fXPos,fYPos);
 	
 		//make users not change the size
 		setResizable(false);
 		setVisible(true);
+		
 		
 	}
 	
@@ -56,13 +62,12 @@ public class gameFrametest extends JFrame implements KeyListener,Runnable
 		width = 800;
 		height = 900;
 		airplane = tk.getImage("plane.png");
-		missileImage = tk.getImage("Miss.png");
-	
+		xplane = tk.getImage("enemy.png");
+		
 	}
 	
 	public void start()
 	{
-		
 		//sets the operation that will happen by default when the user initiates a "close" on this frame.
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		
@@ -84,38 +89,60 @@ public class gameFrametest extends JFrame implements KeyListener,Runnable
 			while(true)
 			{
 				KeyProcess();
-				MissileProcess(); 
+				EnemyProcess();
 				repaint();
 				Thread.sleep(20);
 			}
 		}
 		catch(Exception e)
 		{
+			
 		}
 	}
 	
-	public void MissileProcess()
+	public void EnemyProcess()
 	{
-		if(KeySpace)
+		for(int i =0; i <EnemyList.size(); i++)
 		{
-			ms = new Missile(x,y);
-			MissList.add(ms);
+			en = (Enemy)(EnemyList.get(i));
+			en.move(); 
+			if(en.y < -200)
+			{
+				EnemyList.remove(i);
+			}
 		}
+		if( cnt % 300==0)
+		{
+			en = new Enemy(height -100, 100);
+			EnemyList.add(en);
+			en = new Enemy(height -100, 200);
+			EnemyList.add(en);
+			en = new Enemy(height -100, 300);
+			EnemyList.add(en);
+			en = new Enemy(height -100, 400);
+			EnemyList.add(en);
+			en = new Enemy(height -100, 500);
+			EnemyList.add(en);
+		}
+		
 	}
 	
 	public void paint(Graphics g)
 	{
-		buffImage = createImage(800,900);
+		buffImage = createImage(width,height);
 		buffg = buffImage.getGraphics();
 		
 		update(g);
 	}
 	
+
+	
+	
 	public void update(Graphics g)
 	{
 		DrawChar();
-		DrawMissile(); 
 		
+		DrawEnemy();
 		g.drawImage(buffImage,0,0,this);
 	}
 	
@@ -129,19 +156,13 @@ public class gameFrametest extends JFrame implements KeyListener,Runnable
 		buffg.drawImage(airplane,x+350,y+750,this); // this = imageobserver = hard to explain.
 	}
 	
-	public void DrawMissile()
+	
+	public void DrawEnemy()
 	{
-		for(int i=0; i < MissList.size(); ++i)
+		for( int i=0; i< EnemyList.size(); ++i)
 		{
-			ms=(Missile)(MissList.get(i));
-			
-			buffg.drawImage(missileImage,ms.pos.x+ 150, ms.pos.y+30, this);			
-			ms.move();
-			
-			if( ms.pos.x> width)
-			{
-				MissList.remove(i);
-			}
+			en = (Enemy)(EnemyList.get(i));
+			buffg.drawImage(xplane, en.x, en.y, this);
 		}
 	}
 	
@@ -165,9 +186,6 @@ public class gameFrametest extends JFrame implements KeyListener,Runnable
 			case KeyEvent.VK_RIGHT:
 			KeyRight = true;
 			break;
-			case KeyEvent.VK_SPACE:
-			KeySpace = true;
-			break;
 		}
 	}
 
@@ -188,15 +206,14 @@ public class gameFrametest extends JFrame implements KeyListener,Runnable
 			case KeyEvent.VK_RIGHT:
 			KeyRight = false;
 			break;
-			case KeyEvent.VK_SPACE:
-			KeySpace = false; 
-			break; 
 		}
 	}
+
 	
 	//Executed when the user types something
 	public void keyTyped(KeyEvent e)
 	{
+		
 	}
 	
 	//Actually moves the airplane as the user presses a key
@@ -209,13 +226,11 @@ public class gameFrametest extends JFrame implements KeyListener,Runnable
 	}
 }
 
-
-
 //Resources
 //   https://docs.oracle.com/javase/7/docs/api/java/awt/Toolkit.html 
 //     -->getDefaultToolkit(), getScreenSize()
 //   https://docs.oracle.com/javase/7/docs/api/javax/swing/JFrame.html
-//     -->setDefaultCloseOperation)(JFrame.EXIT_ON_CLOSE)
+//     -->setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE)
 //   https://docs.oracle.com/javase/7/docs/api/java/awt/Graphics.html
 //     -->Graphics
 //   https://docs.oracle.com/javase/7/docs/api/java/awt/event/KeyEvent.html

@@ -1,3 +1,7 @@
+import javax.swing.*;
+import java.awt.*;
+import java.awt.event.*;
+import java.util.*; //for an ArrayList 
 public class Enemy
 {
 	int x;
@@ -11,6 +15,6 @@ public class Enemy
 	}
 	public void move()
 	{
-		x-=3;
+		y-=3;
 	}
 }
