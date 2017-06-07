@@ -394,3 +394,16 @@ public class gameFrame extends JFrame implements KeyListener,Runnable
 //   https://docs.oracle.com/javase/tutorial/extra/fullscreen/doublebuf.html
 //   https://stackoverflow.com/questions/4430356/java-how-to-do-double-buffering-in-swing
 //     -->Doublebuffering 
+
+//Resources
+//   https://docs.oracle.com/javase/7/docs/api/java/awt/Toolkit.html 
+//     -->getDefaultToolkit(), getScreenSize()
+//   https://docs.oracle.com/javase/7/docs/api/javax/swing/JFrame.html
+//     -->setDefaultCloseOperation)(JFrame.EXIT_ON_CLOSE)
+//   https://docs.oracle.com/javase/7/docs/api/java/awt/Graphics.html
+//     -->Graphics
+//   https://docs.oracle.com/javase/7/docs/api/java/awt/event/KeyEvent.html
+//     -->KeyEvent
+//   https://docs.oracle.com/javase/tutorial/extra/fullscreen/doublebuf.html
+//   https://stackoverflow.com/questions/4430356/java-how-to-do-double-buffering-in-swing
+//     -->Doublebuffering 
