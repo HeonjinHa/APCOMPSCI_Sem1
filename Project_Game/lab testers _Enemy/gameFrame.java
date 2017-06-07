@@ -44,7 +44,7 @@ public class gameFrame extends JFrame implements KeyListener,Runnable
 		
 		//To set the frame on the middle of the screen
 		int fXPos = (int)screen.getWidth() / 2 - width / 2;
-		int fYPos = (int)screen.getHeight() / 2 - he/ 2;
+		int fYPos = (int)screen.getHeight() / 2 - height/ 2;
 		
 		setLocation(fXPos,fYPos);
 	
@@ -92,6 +92,7 @@ public class gameFrame extends JFrame implements KeyListener,Runnable
 				EnemyProcess();
 				repaint();
 				Thread.sleep(20);
+				cnt++;
 			}
 		}
 		catch(Exception e)
@@ -111,17 +112,17 @@ public class gameFrame extends JFrame implements KeyListener,Runnable
 				EnemyList.remove(i);
 			}
 		}
-		if( cnt % 300==0)
+		if( cnt % 400==0)
 		{
-			en = new Enemy(height -100, 100);
+			en = new Enemy(width -150, -50);
 			EnemyList.add(en);
-			en = new Enemy(height -100, 200);
+			en = new Enemy(width -300, -50);
 			EnemyList.add(en);
-			en = new Enemy(height -100, 300);
+			en = new Enemy(width-450, -50);
 			EnemyList.add(en);
-			en = new Enemy(height -100, 400);
+			en = new Enemy(width-600, -50);
 			EnemyList.add(en);
-			en = new Enemy(height -100, 500);
+			en = new Enemy(width -750, -50);
 			EnemyList.add(en);
 		}
 		
@@ -141,7 +142,6 @@ public class gameFrame extends JFrame implements KeyListener,Runnable
 	public void update(Graphics g)
 	{
 		DrawChar();
-		
 		DrawEnemy();
 		g.drawImage(buffImage,0,0,this);
 	}

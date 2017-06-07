@@ -15,6 +15,6 @@ public class Enemy
 	}
 	public void move()
 	{
-		y-=3;
+		y+=3;
 	}
 }
