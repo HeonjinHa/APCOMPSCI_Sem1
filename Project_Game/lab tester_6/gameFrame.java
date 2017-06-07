@@ -3,8 +3,9 @@ import java.awt.*;
 import java.awt.event.*;
 import java.util.*;
 import java.io.*;
-import javax.imageio*; 
-import java.awt.image.*;
+import javax.imageio.*;
+import java.awt.image.*; 
+
 
 //KeyListener for keyevents
 //Runnable for threads
@@ -12,6 +13,7 @@ public class gameFrame extends JFrame implements KeyListener,Runnable
 {
 	int width;
 	int height;
+	
 	int x,y;
 	
 	boolean KeyUp = false;
@@ -20,24 +22,35 @@ public class gameFrame extends JFrame implements KeyListener,Runnable
 	boolean KeyRight = false;
     boolean KeySpace = false; 
 	
-	int 
+	int cnt;
+	int ew;
+	int eh;
+	int mw; 
+	int mh; 
+	
 	
 	Thread th;	
 	
 	Toolkit tk = Toolkit.getDefaultToolkit(); //toolkit for creating an image.
+	
 	Image airplane;
 	Image missileImage; 
+	Image xplane;
+	
 	ArrayList MissList = new ArrayList();
+	ArrayList EnemyList = new ArrayList(); 
 	
 	Image buffImage;
 	Graphics buffg;
 	
 	Missile ms; 
+	Enemy en;
 	
 	gameFrame()
 	{		
 		init(); //same as Frame class.
 		start(); //same as Frame class.
+		
 		setTitle("Shooting Game");
 		setSize(width,height);
 		
@@ -63,6 +76,13 @@ public class gameFrame extends JFrame implements KeyListener,Runnable
 		height = 900;
 		airplane = tk.getImage("plane.png");
 		missileImage = tk.getImage("Miss.png");
+		xplane = tk.getImage("enemy.png");
+		
+		ew = ImageWidthValue("enemy.png");
+		eh = ImageHeightValue("enemy.png");
+	
+		mw = ImageWidthValue("Miss.png");
+		mh = ImageHeightValue("Miss.png");
 	
 	}
 	
@@ -90,9 +110,11 @@ public class gameFrame extends JFrame implements KeyListener,Runnable
 			while(true)
 			{
 				KeyProcess();
+				EnemyProcess();
 				MissileProcess(); 
 				repaint();
 				Thread.sleep(20);
+				cnt++;
 			}
 		}
 		catch(Exception e)
@@ -107,6 +129,68 @@ public class gameFrame extends JFrame implements KeyListener,Runnable
 			ms = new Missile(x,y);
 			MissList.add(ms);
 		}
+		
+		for(int i=0;i<MissList.size(); i++)
+		{
+			ms = (Missile)MissList.get(i);
+			ms.move();
+			if(ms.x>width -20)
+			{
+				MissList.remove(i);
+			}
+			
+			for(int j=0; j<EnemyList.size();i++)
+			{
+				en = (Enemy)EnemyList.get(i); 
+				if(Crash(ms.x,ms.y,en.x,mw,mh,ew,eh))
+				{
+					MissList.remove(i);
+					EnemyList.remove(j);
+				}
+			}
+		}
+	}
+	
+	public void EnemyProcess()
+	{
+		for(int i =0; i <EnemyList.size(); i++)
+		{
+			en = (Enemy)(EnemyList.get(i));
+			en.move(); 
+			if(en.y < -200)
+			{
+				EnemyList.remove(i);
+			}
+		}
+		if( cnt % 350==0) // for every loop counte 300, creates enemy at the given (x,y);
+		{
+			en = new Enemy(width -150, -150);
+			EnemyList.add(en);
+			en = new Enemy(width -300, -120);
+			EnemyList.add(en);
+			en = new Enemy(width-450, -150);
+			EnemyList.add(en);
+			en = new Enemy(width-600, -120);
+			EnemyList.add(en);
+			en = new Enemy(width -750, -150);
+			EnemyList.add(en);
+		}
+		
+	}
+	
+	public boolean Crash(int x1,int y1,int x2,int y2,int w1,int h1,int w2,int h2)
+	{
+		boolean check = false; 
+		if(Math.abs((x1+w1/2) -(x2+w2/2)) < (w2/2 + w1/2) 
+		&& Math.abs((y1_h1/2) -(y2 +h2/2)) < (h2/2 + h1/2))
+		{
+			check = true; 
+		}
+		else
+		{
+			check = false; 
+		}
+		return check;
 	}
 	
 	public void paint(Graphics g)
@@ -120,6 +204,7 @@ public class gameFrame extends JFrame implements KeyListener,Runnable
 	public void update(Graphics g)
 	{
 		DrawChar();
+		DrawEnemy();
 		DrawMissile(); 
 		
 		g.drawImage(buffImage,0,0,this);
@@ -148,6 +233,15 @@ public class gameFrame extends JFrame implements KeyListener,Runnable
 			{
 				MissList.remove(i);
 			}
+		}
+	}
+	
+	public void DrawEnemy()
+	{
+		for( int i=0; i< EnemyList.size(); ++i)
+		{
+			en = (Enemy)(EnemyList.get(i));
+			buffg.drawImage(xplane, en.x, en.y, this);
 		}
 	}
 	
@@ -215,7 +309,36 @@ public class gameFrame extends JFrame implements KeyListener,Runnable
 	}
 }
 
+public int ImageWidthValue(String file)
+{
+	int x=0; 
+	try
+	{
+		File f = new File(file); 
+		BufferedImage bi = ImageO.read(f); 
+		x= bi.getWidth();
+	}
+	catch(Exception e)
+	{
+	}
+	
+	return x;
+}
 
+public int ImageHeightValue(String file)
+{
+	int y=0; 
+	try
+	{
+		File f = new File(file);
+		BufferedImage bi = ImageO.read(f);
+		y= bi.getHeight();
+	}
+	catch(Exception e)
+	{
+	}
+	return y;
+}
 
 //Resources
 //   https://docs.oracle.com/javase/7/docs/api/java/awt/Toolkit.html 

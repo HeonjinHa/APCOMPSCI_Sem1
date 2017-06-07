@@ -1,25 +1,20 @@
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
-import java.util.*;
-import java.io.*;
-import javax.imageio.*;
-import java.awt.image.*; 
-
+import java.util.*; //for an ArrayList 
+import java.awt.image.*;
 public class Missile
 {
-	int x;
-	int y; 
+	Point pos; 
 	
 	Missile(int x, int y)
 	{
-		this.x= x;
-		this.y= y;
+		pos = new Point(x,y);
 		
 	}
 	
 	public void move() 
 	{
-		y -=50;
+		pos.y -=50;
 	}
 }
