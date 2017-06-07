@@ -98,7 +98,6 @@ public class Magpie3
    		return "What makes you think that I" + restOfStatement + "you?";
 	}
 	
-	
 	private String transformIYoustatement(String statement) 
 	{
   		statement = statement.trim();
@@ -108,9 +107,10 @@ public class Magpie3
   			statement = statement.substring(0, statement.length() - 1);
   		}
   		int psnOfI = findKeyword(statement, "i");
-  		int psnOfYou1 = findKeyword(statement, "you", psnOfI + 1);
-  		String restOfStatement = statement.substring(psnOfI + 1, psnOfYou1 - 1);
-   		return "Why do you " + restOfStatement + " me?";
+  		int psnOfYou = findKeyword(statement, "you", psnOfI + 1);
+  		String object = statement.substring(psnOfI + 1, psnOfYou - 1);
+   		return "Why do you " + object + " me?";
+		
 	}
 	
 	private int findKeyword(String statement, String goal, int startPos)

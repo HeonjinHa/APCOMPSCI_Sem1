@@ -27,13 +27,6 @@ public class Magpie2
 		{
 			response = "Tell me more about your family.";
 		}
-
-		/** Exercise_03(Final)
-		 * ==================================================
-		 * Create additional code (another else if) that
-		 * responds "Tell me more about your pet" if the
-		 * user mentions the word cat, dog, fish, or turtle
-		 * in their statement.*/
 		 
 		else if (findKeyword(statement, "cat") >=0 
 			|| findKeyword(statement, "turtle") >=0 
@@ -50,17 +43,29 @@ public class Magpie2
 		{
   			response = transformIWantToStatement(statement);
 		}
+		else if (findKeyword(statement, "you") >= 0) 
+		{
+			response = transformYouMeStatement(statement);
+		}
 		else 
 		{
   			int psn = findKeyword(statement, "you", 0);
 			if (psn >= 0 && findKeyword(statement, "me", psn) >= 0) 
 			{
-				response = transformYouMeStatement(statement);
+     		response = transformYouMeStatement(statement);
   			}
-  			else 
-			{
+  			else {
      			response = getRandomResponse();
   			}
+			psn = findKeyword(statement, "I", 0);
+			if (psn >= 0 && findKeyword(statement, "you", psn) >= 0) 
+			{
+					response = transformIYoustatement(statement);
+				}
+			else 
+			{
+				response = getRandomResponse();
+			}
 		}
 		return response;
 	}
@@ -76,6 +81,19 @@ public class Magpie2
   		int psn = findKeyword(statement, "I want to");
   		String restOfStatement = statement.substring(psn + 1, statement.length());
   		return "What would it mean to" + restOfStatement + "?";
+	}
+	private String transformIYoustatement(String statement) 
+	{
+  		statement = statement.trim();
+  		String lastChar = statement.substring(statement.length() - 1, statement.length());
+  		if(lastChar.equals(".") || lastChar.equals("!") || lastChar.equals("?")) 
+		{
+  			statement = statement.substring(0, statement.length() - 1);
+  		}
+  		int psnOfI = findKeyword(statement, "i");
+  		int psnOfYou1 = findKeyword(statement, "you", psnOfI + 1);
+  		String restOfStatement = statement.substring(psnOfI + 1, psnOfYou1 - 1);
+   		return "Why do you " + restOfStatement + " me?";
 	}
 	
 	private String transformYouMeStatement(String statement) 

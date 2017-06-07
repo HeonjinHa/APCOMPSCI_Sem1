@@ -2,6 +2,11 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
 import java.util.*;
+import java.io.*;
+import javax.imageio.*;
+import java.awt.image.*; 
+import java.lang.Math;
+
 
 //KeyListener for keyevents
 //Runnable for threads
@@ -16,19 +21,24 @@ public class gameFrame extends JFrame implements KeyListener,Runnable
 	boolean KeyDown = false;
 	boolean KeyLeft = false;
 	boolean KeyRight = false;
-    boolean KeySpace = false; 
+    boolean KeySpace = false; //Space for shooting missile
 	
 	int cnt;
+	int ew;
+	int eh;
+	int mw; 
+	int mh; 
+	
 	
 	Thread th;	
 	
-	Toolkit tk = Toolkit.getDefaultToolkit(); //toolkit for creating an image.
 	
+	Toolkit tk = Toolkit.getDefaultToolkit(); //toolkit for creating an image.
 	Image airplane;
-	Image missileImage; 
+	Image missileImage; // variable of missile image 
+	ArrayList MissList = new ArrayList(); //Arrange missiles with arrayList
 	Image xplane;
 	
-	ArrayList MissList = new ArrayList();
 	ArrayList EnemyList = new ArrayList(); 
 	
 	Image buffImage;
@@ -61,13 +71,17 @@ public class gameFrame extends JFrame implements KeyListener,Runnable
 	
 	public void init()
 	{ 
-		x = 100;
-		y = 100;
 		width = 800;
 		height = 900;
 		airplane = tk.getImage("plane.png");
 		missileImage = tk.getImage("Miss.png");
 		xplane = tk.getImage("enemy.png");
+		
+		ew = ImageWidthValue("enemy.png");
+		eh = ImageHeightValue("enemy.png");
+	
+		mw = ImageWidthValue("Miss.png");
+		mh = ImageHeightValue("Miss.png");
 	
 	}
 	
@@ -114,7 +128,28 @@ public class gameFrame extends JFrame implements KeyListener,Runnable
 			ms = new Missile(x,y);
 			MissList.add(ms);
 		}
+		
+		for(int i=0;i<MissList.size(); i++)
+		{
+			ms = (Missile)MissList.get(i);
+			ms.move();
+			if(ms.x>width -20)
+			{
+				MissList.remove(i);
+			}
+			
+			for(int j=0; j<EnemyList.size();i++)
+			{
+				en = (Enemy)EnemyList.get(i); 
+				if(Crash(ms.x,ms.y,en.x,en.y,mw,mh,ew,eh))
+				{
+					MissList.remove(i);
+					EnemyList.remove(j);
+				}
+			}
+		}
 	}
+	
 	public void EnemyProcess()
 	{
 		for(int i =0; i <EnemyList.size(); i++)
@@ -142,6 +177,20 @@ public class gameFrame extends JFrame implements KeyListener,Runnable
 		
 	}
 	
+	public boolean Crash(int x1,int y1,int x2,int y2,int w1,int h1,int w2,int h2)
+	{
+		boolean check = false; 
+		if(Math.abs((x1+w1/2) -(x2+w2/2)) < (w2/2 + w1/2) && Math.abs((y1+h1/2) -(y2 +h2/2)) < (h2/2 + h1/2))
+		{
+			check = true; 
+		}
+		else
+		{
+			check = false; 
+		}
+		return check;
+	}
+	
 	public void paint(Graphics g)
 	{
 		buffImage = createImage(width,height);
@@ -166,7 +215,7 @@ public class gameFrame extends JFrame implements KeyListener,Runnable
 		buffg.clearRect(0,0,width,height);
 		
 		//Put the image of an airplane on (100,100).
-		buffg.drawImage(airplane,x+187,y+670,this); // this = imageobserver = hard to explain.
+		buffg.drawImage(airplane,x+287,y+770,this); // this = imageobserver = hard to explain.
 	}
 	
 	public void DrawMissile()
@@ -175,13 +224,9 @@ public class gameFrame extends JFrame implements KeyListener,Runnable
 		{
 			ms=(Missile)(MissList.get(i));
 			
-			buffg.drawImage(missileImage,ms.pos.x+ 250, ms.pos.y+650, this);			
+			buffg.drawImage(missileImage,ms.x + 350, ms.y+750, this);			
 			ms.move();
-			
-			if( ms.pos.x> width)
-			{
-				MissList.remove(i);
-			}
+		
 		}
 	}
 	
@@ -256,9 +301,40 @@ public class gameFrame extends JFrame implements KeyListener,Runnable
 		if(KeyLeft == true) x -=10;
 		if(KeyRight == true) x +=10;
 	}
+	
+	public int ImageWidthValue(String file)
+{
+	int x=0; 
+	try
+	{
+		File f = new File(file); 
+		BufferedImage bi = ImageIO.read(f); 
+		x= bi.getWidth();
+	}
+	catch(Exception e)
+	{
+	}
+	
+	return x;
 }
 
+	public int ImageHeightValue(String file)
+	{
+		int y=0; 
+		try
+		{
+			File f = new File(file);
+			BufferedImage bi = ImageIO.read(f);
+			y= bi.getHeight();
+		}
+		catch(Exception e)
+		{
+		}
+		return y;
+	}
+}
 
+	
 
 //Resources
 //   https://docs.oracle.com/javase/7/docs/api/java/awt/Toolkit.html 
