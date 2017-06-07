@@ -5,6 +5,7 @@ import java.util.*;
 import java.io.*;
 import javax.imageio.*;
 import java.awt.image.*; 
+import java.lang.Math;
 
 
 //KeyListener for keyevents
@@ -70,8 +71,6 @@ public class gameFrame extends JFrame implements KeyListener,Runnable
 	
 	public void init()
 	{ 
-		x = 100;
-		y = 100;
 		width = 800;
 		height = 900;
 		airplane = tk.getImage("plane.png");
@@ -142,7 +141,7 @@ public class gameFrame extends JFrame implements KeyListener,Runnable
 			for(int j=0; j<EnemyList.size();i++)
 			{
 				en = (Enemy)EnemyList.get(i); 
-				if(Crash(ms.x,ms.y,en.x,mw,mh,ew,eh))
+				if(Crash(ms.x,ms.y,en.x,en.y,mw,mh,ew,eh))
 				{
 					MissList.remove(i);
 					EnemyList.remove(j);
@@ -181,8 +180,7 @@ public class gameFrame extends JFrame implements KeyListener,Runnable
 	public boolean Crash(int x1,int y1,int x2,int y2,int w1,int h1,int w2,int h2)
 	{
 		boolean check = false; 
-		if(Math.abs((x1+w1/2) -(x2+w2/2)) < (w2/2 + w1/2) 
-		&& Math.abs((y1_h1/2) -(y2 +h2/2)) < (h2/2 + h1/2))
+		if(Math.abs((x1+w1/2) -(x2+w2/2)) < (w2/2 + w1/2) && Math.abs((y1+h1/2) -(y2 +h2/2)) < (h2/2 + h1/2))
 		{
 			check = true; 
 		}
@@ -217,7 +215,7 @@ public class gameFrame extends JFrame implements KeyListener,Runnable
 		buffg.clearRect(0,0,width,height);
 		
 		//Put the image of an airplane on (100,100).
-		buffg.drawImage(airplane,x+187,y+670,this); // this = imageobserver = hard to explain.
+		buffg.drawImage(airplane,x+287,y+770,this); // this = imageobserver = hard to explain.
 	}
 	
 	public void DrawMissile()
@@ -226,13 +224,9 @@ public class gameFrame extends JFrame implements KeyListener,Runnable
 		{
 			ms=(Missile)(MissList.get(i));
 			
-			buffg.drawImage(missileImage,ms.pos.x+ 250, ms.pos.y+650, this);			
+			buffg.drawImage(missileImage,ms.x + 350, ms.y+750, this);			
 			ms.move();
-			
-			if( ms.pos.x> width)
-			{
-				MissList.remove(i);
-			}
+		
 		}
 	}
 	
@@ -307,15 +301,14 @@ public class gameFrame extends JFrame implements KeyListener,Runnable
 		if(KeyLeft == true) x -=10;
 		if(KeyRight == true) x +=10;
 	}
-}
-
-public int ImageWidthValue(String file)
+	
+	public int ImageWidthValue(String file)
 {
 	int x=0; 
 	try
 	{
 		File f = new File(file); 
-		BufferedImage bi = ImageO.read(f); 
+		BufferedImage bi = ImageIO.read(f); 
 		x= bi.getWidth();
 	}
 	catch(Exception e)
@@ -325,20 +318,23 @@ public int ImageWidthValue(String file)
 	return x;
 }
 
-public int ImageHeightValue(String file)
-{
-	int y=0; 
-	try
+	public int ImageHeightValue(String file)
 	{
-		File f = new File(file);
-		BufferedImage bi = ImageO.read(f);
-		y= bi.getHeight();
+		int y=0; 
+		try
+		{
+			File f = new File(file);
+			BufferedImage bi = ImageIO.read(f);
+			y= bi.getHeight();
+		}
+		catch(Exception e)
+		{
+		}
+		return y;
 	}
-	catch(Exception e)
-	{
-	}
-	return y;
 }
+
+	
 
 //Resources
 //   https://docs.oracle.com/javase/7/docs/api/java/awt/Toolkit.html 
@@ -351,4 +347,3 @@ public int ImageHeightValue(String file)
 //     -->KeyEvent
 //   https://docs.oracle.com/javase/tutorial/extra/fullscreen/doublebuf.html
 //   https://stackoverflow.com/questions/4430356/java-how-to-do-double-buffering-in-swing
-//     -->Doublebuffering 
