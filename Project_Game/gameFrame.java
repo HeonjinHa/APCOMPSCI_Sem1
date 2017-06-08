@@ -21,7 +21,7 @@ public class gameFrame extends JFrame implements KeyListener,Runnable
 	boolean KeyDown = false;
 	boolean KeyLeft = false;
 	boolean KeyRight = false;
-    boolean KeySpace = false; //Space for shooting missile
+    boolean KeySpace = false; 
 	
 	int cnt;
 	int ew;
@@ -32,13 +32,13 @@ public class gameFrame extends JFrame implements KeyListener,Runnable
 	
 	Thread th;	
 	
-	
 	Toolkit tk = Toolkit.getDefaultToolkit(); //toolkit for creating an image.
+	
 	Image airplane;
-	Image missileImage; // variable of missile image 
-	ArrayList MissList = new ArrayList(); //Arrange missiles with arrayList
+	Image missileImage; 
 	Image xplane;
 	
+	ArrayList MissList = new ArrayList();
 	ArrayList EnemyList = new ArrayList(); 
 	
 	Image buffImage;
@@ -347,4 +347,3 @@ public class gameFrame extends JFrame implements KeyListener,Runnable
 //     -->KeyEvent
 //   https://docs.oracle.com/javase/tutorial/extra/fullscreen/doublebuf.html
 //   https://stackoverflow.com/questions/4430356/java-how-to-do-double-buffering-in-swing
-//     -->Doublebuffering 
