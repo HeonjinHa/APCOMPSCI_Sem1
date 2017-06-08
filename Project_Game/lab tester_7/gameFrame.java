@@ -13,8 +13,6 @@ public class gameFrame extends JFrame implements KeyListener,Runnable
 	int height;
 	
 	int x,y;
-	
-	int[] cx= {0,0,0};
 	int bx = 0; 
 	
 	boolean KeyUp = false;
@@ -31,7 +29,7 @@ public class gameFrame extends JFrame implements KeyListener,Runnable
 	int enemySpeed;
 	int Status = 0; 
 	int gameScore; 
-	int Hitpoint;
+	
 	
 	
 	Thread th;	
@@ -102,7 +100,6 @@ public class gameFrame extends JFrame implements KeyListener,Runnable
 			explo[i] = new ImageIcon("explosion"+i+".png").getImage();
 		}
 		gameScore =0;
-		Hitpoint = 3; 
 		playerSpeed =5; 
 	    missileSpeed =11;
 		fireSpeed = 15; 
@@ -196,7 +193,6 @@ public class gameFrame extends JFrame implements KeyListener,Runnable
 			}
 			if(Crash(x,y,en.x,en.y,airplane[0],xplane))
 			{
-			Hitpoint --; 
 			EnemyList.remove(i);
 			gameScore += 10; 
 			
@@ -330,7 +326,7 @@ public class gameFrame extends JFrame implements KeyListener,Runnable
 			ms=(Missile)(MissList.get(i));	////////////////
 			ms.move();
 			
-			if( ms.x> width)
+			if( ms.y > height)
 			{
 				MissList.remove(i);
 			}
@@ -406,9 +402,9 @@ public class gameFrame extends JFrame implements KeyListener,Runnable
 	public void DrawStatus() 
 	{
 		buffg.setFont(new Font("Default", Font.BOLD, 15));
-		buffg.drawString("SCORE: " + gameScore,600,600);
-		buffg.drawString("Missile Count: " + MissList.size(),600,640);
-		buffg.drawString("Enemy Count: " + EnemyList.size(),600,660);
+		buffg.drawString("SCORE: " + gameScore,600,60);
+		buffg.drawString("Missile Count: " + MissList.size(),600,80);
+		buffg.drawString("Enemy Missed: " + EnemyList.size(),600,100);
 		
 	}
 	
