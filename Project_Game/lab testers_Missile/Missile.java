@@ -5,16 +5,18 @@ import java.util.*; //for an ArrayList
 
 public class Missile
 {
-	Point pos; 
+	int x;
+	int y;
 	
 	Missile(int x, int y)
 	{
-		pos = new Point(x,y);
+		this.x= x; 
+		this.y= y; 
 		
 	}
 	
 	public void move() 
 	{
-		pos.y -=50;
+		y -=50;
 	}
 }

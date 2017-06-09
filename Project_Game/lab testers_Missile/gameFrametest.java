@@ -135,10 +135,10 @@ public class gameFrametest extends JFrame implements KeyListener,Runnable
 		{
 			ms=(Missile)(MissList.get(i));
 			
-			buffg.drawImage(missileImage,ms.pos.x+ 250, ms.pos.y+650, this);			
+			buffg.drawImage(missileImage,ms.x+ 250, ms.y+650, this);			
 			ms.move();
 			
-			if( ms.pos.x> width)
+			if( ms.x> width)
 			{
 				MissList.remove(i);
 			}

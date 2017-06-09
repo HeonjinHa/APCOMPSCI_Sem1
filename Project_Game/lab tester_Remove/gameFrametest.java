@@ -1,21 +1,19 @@
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
-import java.util.*;
-import java.io.*;
-import javax.imageio.*;
+import java.util.*; //import for an ArrayList 
 import java.awt.image.*; 
-import java.lang.Math;
-
 
 //KeyListener for keyevents
 //Runnable for threads
-public class gameFrame extends JFrame implements KeyListener,Runnable
+public class gameFrametest extends JFrame implements KeyListener,Runnable
 {
 	int width;
 	int height;
-	
+	int bx = 0; 
 	int x,y;
+	int Status = 0; 
+	int fireSpeed;
 	
 	boolean KeyUp = false;
 	boolean KeyDown = false;
@@ -23,20 +21,16 @@ public class gameFrame extends JFrame implements KeyListener,Runnable
 	boolean KeyRight = false;
     boolean KeySpace = false; 
 	
-	int cnt;
-	int ew;
-	int eh;
-	int mw; 
-	int mh; 
-	
-	
+	int cnt; 
 	Thread th;	
+	
 	
 	Toolkit tk = Toolkit.getDefaultToolkit(); //toolkit for creating an image.
 	
-	Image airplane;
+	Image[] airplane;
 	Image missileImage; 
 	Image xplane;
+	Image background;
 	
 	ArrayList MissList = new ArrayList();
 	ArrayList EnemyList = new ArrayList(); 
@@ -47,7 +41,7 @@ public class gameFrame extends JFrame implements KeyListener,Runnable
 	Missile ms; 
 	Enemy en;
 	
-	gameFrame()
+	gameFrametest()
 	{		
 		init(); //same as Frame class.
 		start(); //same as Frame class.
@@ -71,18 +65,22 @@ public class gameFrame extends JFrame implements KeyListener,Runnable
 	
 	public void init()
 	{ 
+	
 		width = 800;
 		height = 900;
-		airplane = tk.getImage("plane.png");
+		fireSpeed = 20; 
 		missileImage = tk.getImage("Miss.png");
 		xplane = tk.getImage("enemy.png");
 		
-		ew = ImageWidthValue("enemy.png");
-		eh = ImageHeightValue("enemy.png");
-	
-		mw = ImageWidthValue("Miss.png");
-		mh = ImageHeightValue("Miss.png");
-	
+		background = new 
+		ImageIcon("Map.png").getImage(); 
+		
+		airplane = new Image[4];
+		for(int i =0; i<airplane.length; i++)
+		{
+			airplane[i] = new ImageIcon("plane"+i+".png").getImage();
+		}
+
 	}
 	
 	public void start()
@@ -121,37 +119,9 @@ public class gameFrame extends JFrame implements KeyListener,Runnable
 		}
 	}
 	
-	public void MissileProcess()
-	{
-		if(KeySpace)
-		{
-			ms = new Missile(x,y);
-			MissList.add(ms);
-		}
-		
-		for(int i=0;i<MissList.size(); i++)
-		{
-			ms = (Missile)MissList.get(i);
-			ms.move();
-			if(ms.x>width -20)
-			{
-				MissList.remove(i);
-			}
-			
-			for(int j=0; j<EnemyList.size();i++)
-			{
-				en = (Enemy)EnemyList.get(i); 
-				if(Crash(ms.x,ms.y,en.x,en.y,mw,mh,ew,eh))
-				{
-					MissList.remove(i);
-					EnemyList.remove(j);
-				}
-			}
-		}
-	}
-	
 	public void EnemyProcess()
 	{
+
 		for(int i =0; i <EnemyList.size(); i++)
 		{
 			en = (Enemy)(EnemyList.get(i));
@@ -160,35 +130,96 @@ public class gameFrame extends JFrame implements KeyListener,Runnable
 			{
 				EnemyList.remove(i);
 			}
+			if(Crash(x,y,en.x,en.y,airplane[1],xplane))
+			{
+			 EnemyList.remove(i);
+			}
 		}
-		if( cnt % 350==0) // for every loop counte 300, creates enemy at the given (x,y);
+		if( cnt % 200==0)
 		{
-			en = new Enemy(width -150, -150);
+			en = new Enemy(width -150, -30);
 			EnemyList.add(en);
-			en = new Enemy(width -300, -120);
+			en = new Enemy(width -300, -50);
 			EnemyList.add(en);
-			en = new Enemy(width-450, -150);
+			en = new Enemy(width-450, -30);
 			EnemyList.add(en);
-			en = new Enemy(width-600, -120);
+			en = new Enemy(width-600, -50);
 			EnemyList.add(en);
-			en = new Enemy(width -750, -150);
+			en = new Enemy(width -750, -30);
 			EnemyList.add(en);
 		}
 		
 	}
-	
-	public boolean Crash(int x1,int y1,int x2,int y2,int w1,int h1,int w2,int h2)
+	public boolean Crash(int x1, int y1, int x2, int y2, Image img1, Image img2)
 	{
 		boolean check = false; 
-		if(Math.abs((x1+w1/2) -(x2+w2/2)) < (w2/2 + w1/2) && Math.abs((y1+h1/2) -(y2 +h2/2)) < (h2/2 + h1/2))
+		if( Math.abs( ( x1 + img1.getWidth(null) / 3)  
+		- ( x2 + img2.getWidth(null) / 3 ))  
+		< ( img2.getWidth(null) / 3 + img1.getWidth(null) / 3 )
+		&& Math.abs( ( y1 + img1.getHeight(null) / 3 )  
+		- ( y2 + img2.getHeight(null) / 3 ))  
+		< ( img2.getHeight(null)/3 + img1.getHeight(null)/3 ) )
 		{
 			check = true; 
 		}
-		else
+		else 
 		{
-			check = false; 
+			check = false;
 		}
-		return check;
+		return check; 
+	}
+	
+	public boolean Crash2(int x1, int y1, int x2, int y2, Image img1, Image img2)
+	{
+		boolean check = false; 
+		if( Math.abs( ( x1 + img1.getWidth(null)+35)  
+		- ( x2 + img2.getWidth(null)+35))  
+		< ( img2.getWidth(null)+35  + img1.getWidth(null)+35 )
+		&& Math.abs( ( y1 + img1.getHeight(null)/2 )  
+		- ( y2 + img2.getHeight(null)/2 ))  
+		< ( img2.getHeight(null)/2+ img1.getHeight(null)/2 ) )
+		{
+			check = true; 
+		}
+		else 
+		{
+			check = false;
+		}
+		return check; 
+	}
+	
+	public void MissileProcess()
+	{
+		if(KeySpace)
+		{
+			if((cnt % fireSpeed) == 1)
+			{
+				ms = new Missile(x, y);
+				MissList.add(ms);
+			}
+			//ms = new Missile(x,y);
+			//MissList.add(ms);
+		}
+		for (int i=0; i<MissList.size(); i++)
+		{
+			ms = (Missile)MissList.get(i);
+			ms.move(); 
+			if(ms.y > height -20)
+			{
+				MissList.remove(i); 
+			}
+			
+			for (int j=0; j<EnemyList.size(); j++)
+			{
+				en =(Enemy)EnemyList.get(j); 
+				
+				if(Crash2(ms.x, ms.y, en.x, en.y,missileImage,xplane))
+				{
+					MissList.remove(i); 
+					EnemyList.remove(j);
+				}
+			}
+		}
 	}
 	
 	public void paint(Graphics g)
@@ -201,21 +232,29 @@ public class gameFrame extends JFrame implements KeyListener,Runnable
 	
 	public void update(Graphics g)
 	{
-		DrawChar();
+		DrawBackground();
 		DrawEnemy();
 		DrawMissile(); 
-		
+		DrawPlayer();
+		DrawStatus();
 		g.drawImage(buffImage,0,0,this);
 	}
 	
-	public void DrawChar()
+	public void DrawBackground()//method that draws the background
 	{
 		//Clears the specified rectangle by filling it with 
-		//the background color of the current drawing surface.
 		buffg.clearRect(0,0,width,height);
-		
-		//Put the image of an airplane on (100,100).
-		buffg.drawImage(airplane,x+287,y+770,this); // this = imageobserver = hard to explain.
+		if (bx>=-1)
+		{
+			buffg.drawImage(background,0,bx-5800,this);
+			bx +=1;	
+			
+		}
+		else 
+		{
+			bx=0;
+		}
+		//buffg.drawImage(airplane,x+187,y+670,this); // this = imageobserver = hard to explain.
 	}
 	
 	public void DrawMissile()
@@ -224,12 +263,15 @@ public class gameFrame extends JFrame implements KeyListener,Runnable
 		{
 			ms=(Missile)(MissList.get(i));
 			
-			buffg.drawImage(missileImage,ms.x + 350, ms.y+750, this);			
+			buffg.drawImage(missileImage,ms.x+62, ms.y-20, this);			
 			ms.move();
-		
+			
+			if(ms.x> width)
+			{
+				MissList.remove(i);
+			}
 		}
 	}
-	
 	public void DrawEnemy()
 	{
 		for( int i=0; i< EnemyList.size(); ++i)
@@ -239,6 +281,30 @@ public class gameFrame extends JFrame implements KeyListener,Runnable
 		}
 	}
 	
+	public void DrawPlayer()
+	{
+		switch(Status)
+		{
+			case 0: 
+			if((cnt/4 %2)==0)
+			{
+				buffg.drawImage(airplane[1],x,y,this);
+			}
+			else
+			{
+				buffg.drawImage(airplane[2],x,y,this);
+			}
+			break;
+		}
+	}
+	
+	public void DrawStatus() 
+	{
+		buffg.setFont(new Font("Default", Font.BOLD, 15));
+		buffg.drawString("Missile shot: " + MissList.size(),600,640);
+		buffg.drawString("Enemy missed: " + EnemyList.size(),600,660);
+		
+	}
 	//Actions when the user presses control keys
 	public void keyPressed(KeyEvent e)
 	{
@@ -301,40 +367,9 @@ public class gameFrame extends JFrame implements KeyListener,Runnable
 		if(KeyLeft == true) x -=10;
 		if(KeyRight == true) x +=10;
 	}
-	
-	public int ImageWidthValue(String file)
-{
-	int x=0; 
-	try
-	{
-		File f = new File(file); 
-		BufferedImage bi = ImageIO.read(f); 
-		x= bi.getWidth();
-	}
-	catch(Exception e)
-	{
-	}
-	
-	return x;
 }
 
-	public int ImageHeightValue(String file)
-	{
-		int y=0; 
-		try
-		{
-			File f = new File(file);
-			BufferedImage bi = ImageIO.read(f);
-			y= bi.getHeight();
-		}
-		catch(Exception e)
-		{
-		}
-		return y;
-	}
-}
 
-	
 
 //Resources
 //   https://docs.oracle.com/javase/7/docs/api/java/awt/Toolkit.html 
@@ -347,3 +382,4 @@ public class gameFrame extends JFrame implements KeyListener,Runnable
 //     -->KeyEvent
 //   https://docs.oracle.com/javase/tutorial/extra/fullscreen/doublebuf.html
 //   https://stackoverflow.com/questions/4430356/java-how-to-do-double-buffering-in-swing
+//     -->Doublebuffering 
